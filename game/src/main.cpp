@@ -1,6 +1,6 @@
-#include <Bounce2.h>
-
 #include <Arduino.h>
+
+#include <Bounce2.h>
 #include <U8g2lib.h>
 
 #include "logo.h"
@@ -102,4 +102,3 @@ void loop(void) {
 
   u8g2.sendBuffer();
 }
-
