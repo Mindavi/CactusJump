@@ -131,35 +131,25 @@ void resetGame() {
   player = Player();
 }
 
-void loop(void) {
-  // In the loop so it's only true once, after this it's false again.
-  // This is so it won't think the button is pressed again every loop.
-  bool buttonPressed = false;
-
-  if (button.update()) {
-    buttonPressed = button.read();
-    Serial.println("Button update");
-  }
-
-  // update game logic
+void updateGameLogic(bool button_pressed) {
   switch (game_state) {
     case start:
       {
-        if (buttonPressed) {
+        if (button_pressed) {
           nextGameState();
         }
         break;
       }
     case hiscore:
       {
-        if (buttonPressed) {
+        if (button_pressed) {
           nextGameState();
         }
         break;
       }
     case play:
       {
-        if (buttonPressed) {
+        if (button_pressed) {
           if (player.onGround()) {
             player.jump();
           }
@@ -179,7 +169,7 @@ void loop(void) {
       }
     case gameOver:
       {
-        if (buttonPressed) {
+        if (button_pressed) {
           resetGame();
           nextGameState();
         }
@@ -191,7 +181,9 @@ void loop(void) {
         break;
       }
   }
+}
 
+void updateGameGraphics() {
   // clear buffer to start drawing
   u8g2.clearBuffer();
 
@@ -228,4 +220,18 @@ void loop(void) {
 
   // draw everything on the screen
   u8g2.sendBuffer();
+}
+
+void loop(void) {
+  // In the loop so it's only true once, after this it's false again.
+  // This is so it won't think the button is pressed again every loop.
+  bool buttonPressed = false;
+
+  if (button.update()) {
+    buttonPressed = button.read();
+    Serial.println("Button update");
+  }
+
+  updateGameLogic(buttonPressed);
+  updateGameGraphics();
 }
