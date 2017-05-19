@@ -179,8 +179,6 @@ void loop(void) {
       }
     case gameOver:
       {
-        drawGameOver();
-        drawScore();
         if (buttonPressed) {
           resetGame();
           nextGameState();
@@ -200,20 +198,32 @@ void loop(void) {
   // update graphics
   switch (game_state) {
     case start:
-    {
-      drawBootupScreen();
-      break;
-    }
+      {
+        drawBootupScreen();
+        break;
+      }
     case hiscore:
-    {
-      drawHiscoreScreen();
-      break;
-    }
+      {
+        drawHiscoreScreen();
+        break;
+      }
     case play:
-    {
-      drawPlayer(player.getYPosition());
-      drawObstacles();
-    }
+      {
+        drawPlayer(player.getYPosition());
+        drawObstacles();
+        break;
+      }
+    case gameOver:
+      {
+        drawGameOver();
+        drawScore();
+        break;
+      }
+    default:
+      {
+        Serial.println("invalid game state");
+        break;
+      }
   }
 
   // draw everything on the screen
