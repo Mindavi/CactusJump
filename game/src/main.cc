@@ -1,3 +1,5 @@
+// Copyright 2017 Rick van Schijndel
+
 #include <Arduino.h>
 #include <stdio.h>
 
@@ -6,7 +8,9 @@
 
 #include "logo.h"
 #include "player_dick.h"
-#include "gameState.h"
+#include "game_state.h"
+
+#include "player.h"
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -15,20 +19,17 @@
 #include <Wire.h>
 #endif
 
-const int buttonPin = D3;
-const int screenWidth = 128;
-const int screenHeight = 64;
+const uint8_t buttonPin = D3;
+const uint8_t screenWidth = 128;
+const uint8_t screenHeight = 64;
 
-// for the jumping algorithm
-const int gravity = 1;
-const int jump_velocity = 8;
-
-// global game state
+// Global game state
 gameState game_state = start;
-int16_t player_y_position = 0; // 0 is on the ground, negative is invalid
-int16_t player_y_velocity = 0; // positive is going up, negative is falling down
-uint32_t distance_traveled = 0; // start at 0, represents score
 
+// The player in the game
+Player player;
+
+// The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 Bounce button;
@@ -47,10 +48,15 @@ inline void nextGameState() {
   game_state = static_cast<gameState>((game_state + 1) % (gameOver + 1));
 }
 
-void drawPlayer(int y_position = 0)
-{
-  int y_position_from_beneath = screenHeight - player_height - y_position ;
-  u8g2.drawXBM(((screenWidth / 3) - (player_width / 2)), y_position_from_beneath, player_width, player_height, player_bits);
+void drawPlayer(int y_position = 0) {
+  int16_t y_position_from_beneath = screenHeight - player_height - y_position;
+  int16_t player_y_pos_left = ((screenWidth / 3) - (player_width / 2));
+  u8g2.drawXBM(
+    player_y_pos_left,
+    y_position_from_beneath,
+    player_width,
+    player_height,
+    player_bits);
 }
 
 void drawObstacles() {
@@ -58,11 +64,15 @@ void drawObstacles() {
 }
 
 
-void drawBootupScreen(void)
-{
-  int logoMiddleHorizontal = (screenWidth / 2) - (bootup_width / 2);
-  int logoMiddleVertical = (screenHeight / 2) - (bootup_height / 2);
-  u8g2.drawXBM(logoMiddleHorizontal, logoMiddleVertical, bootup_width, bootup_height, bootup_bits);
+void drawBootupScreen(void) {
+  int logoMiddleX = (screenWidth / 2) - (bootup_width / 2);
+  int logoMiddleY = (screenHeight / 2) - (bootup_height / 2);
+  u8g2.drawXBM(
+    logoMiddleY,
+    logoMiddleX,
+    bootup_width,
+    bootup_height,
+    bootup_bits);
 }
 
 const int x_pos_gameover = 20;
@@ -74,10 +84,10 @@ void drawGameOver(void) {
 
 const int x_pos_score = 20;
 const int y_pos_score = 60;
-const size_t score_buffer_size = 20;
+const size_t kScoreBufferSize = 20;
 void drawScore(void) {
-  char scorebuffer[score_buffer_size];
-  snprintf(scorebuffer, score_buffer_size, "Score: %u", distance_traveled);
+  char scorebuffer[kScoreBufferSize];
+  snprintf(scorebuffer, kScoreBufferSize, "Score: %u", player.getScore());
   u8g2.drawStr(x_pos_score, y_pos_score, scorebuffer);
 }
 
@@ -96,56 +106,23 @@ bool collisionDetected(void) {
   */
 
   // TODO: implement algorithm, remove auto logic
-  return distance_traveled > random(100, 250);
-}
-
-inline bool playerOnGround(void) {
-  return player_y_position == 0;
-}
-
-void updatePlayerYPosition(void) {
-  // player stops falling when ground is hit
-  if (playerOnGround() && player_y_velocity <= 0) {
-    player_y_velocity = 0;
-    return;
-  }
-  else if (!playerOnGround() || player_y_velocity > 0) {
-    // increment height with velocity, also if velocity is negative (falling)
-    player_y_position += player_y_velocity;
-    if (player_y_position < 0) {
-      player_y_position = 0;
-    }
-    // subtract gravity from velocity
-    player_y_velocity -= gravity;
-  }
+  return player.getScore() > (unsigned)random(100, 250);
 }
 
 void updateObstaclePosition(void) {
   // TODO
 }
 
-void updateScore(void) {
-  distance_traveled += 1;
-}
-
-// unconditional jump ;-)
-void jump(void) {
-  player_y_velocity = jump_velocity;
-}
-
 void resetGame() {
-  player_y_position = 0;
-  player_y_velocity = 0;
-  distance_traveled = 0;
+  player = Player();
 }
 
 void loop(void) {
-  // in the loop so it's only true once, after this it's false again.
-  //This is so it won't think the button is pressed again every loop.
+  // In the loop so it's only true once, after this it's false again.
+  // This is so it won't think the button is pressed again every loop.
   bool buttonPressed = false;
 
-  if (button.update())
-  {
+  if (button.update()) {
     buttonPressed = button.read();
     Serial.println("Button update");
   }
@@ -153,8 +130,7 @@ void loop(void) {
   // clear buffer to start drawing
   u8g2.clearBuffer();
 
-  switch (game_state)
-  {
+  switch (game_state) {
     case start:
       {
         drawBootupScreen();
@@ -174,14 +150,14 @@ void loop(void) {
     case play:
       {
         if (buttonPressed) {
-          if (playerOnGround()) {
-            jump();
+          if (player.onGround()) {
+            player.jump();
           }
         }
 
-        updatePlayerYPosition();
+        player.updateYPosition();
         updateObstaclePosition();
-        drawPlayer(player_y_position);
+        drawPlayer(player.getYPosition());
         drawObstacles();
 
         if (collisionDetected()) {
@@ -190,7 +166,7 @@ void loop(void) {
         }
         // happens after collision detection, so score will only get higher
         // if player does not collide
-        updateScore();
+        player.updateScore();
         break;
       }
     case gameOver:

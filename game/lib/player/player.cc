@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "player.h"
 
 Player::Player() {}
 
@@ -23,8 +23,7 @@ void Player::updateYPosition() {
   if (onGround() && m_y_velocity <= 0) {
     m_y_velocity = 0;
     return;
-  }
-  else if (!onGround() || m_y_velocity > 0) {
+  } else if (!onGround() || m_y_velocity > 0) {
     // increment height with velocity, also if velocity is negative (falling)
     m_y_position += m_y_velocity;
     if (m_y_position < 0) {
@@ -33,4 +32,8 @@ void Player::updateYPosition() {
     // subtract gravity from velocity
     m_y_velocity -= kGravity;
   }
+}
+
+int16_t Player::getYPosition() {
+  return m_y_position;
 }
