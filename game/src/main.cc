@@ -105,9 +105,9 @@ void drawScore() {
   u8g2.drawStr(kScoreX, kScoreY, score_buffer);
 }
 
-const uint8_t kHiscoreX = 0;
-const uint8_t kHiscoreY = 20;
 void drawHiscoreScreen() {
+  static const uint8_t kHiscoreX = 0;
+  static const uint8_t kHiscoreY = 20;
   u8g2.drawStr(kHiscoreX, kHiscoreY, "HI SCORES");
   // TODO: draw hi scores
 }
