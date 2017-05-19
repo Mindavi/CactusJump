@@ -61,7 +61,7 @@ inline void nextGameState() {
   game_state = static_cast<gameState>((game_state + 1) % (gameOver + 1));
 }
 
-void drawPlayer(int y = 0) {
+void drawPlayer(uint16_t y = 0) {
   int16_t y_position_from_ground = kScreenHeight - player_asset.getHeight() - y;
   int16_t player_x = ((kScreenWidth / 3) - (player_asset.getHeight() / 2));
   u8g2.drawXBM(
@@ -78,8 +78,8 @@ void drawObstacles() {
 
 
 void drawBootupScreen(void) {
-  int logoMiddleX = (kScreenWidth / 2) - (bootup_width / 2);
-  int logoMiddleY = (kScreenHeight / 2) - (bootup_height / 2);
+  int16_t logoMiddleX = (kScreenWidth / 2) - (bootup_width / 2);
+  int16_t logoMiddleY = (kScreenHeight / 2) - (bootup_height / 2);
   u8g2.drawXBM(
     logoMiddleX,
     logoMiddleY,
@@ -88,15 +88,15 @@ void drawBootupScreen(void) {
     bootup_bits);
 }
 
-const int x_pos_gameover = 20;
-const int y_pos_gameover = 20;
+const uint8_t x_pos_gameover = 20;
+const uint8_t y_pos_gameover = 20;
 void drawGameOver(void) {
   u8g2.drawStr(x_pos_gameover, y_pos_gameover, "GAME OVER");
   // TODO: draw fancy asset?
 }
 
-const int x_pos_score = 20;
-const int y_pos_score = 60;
+const uint8_t x_pos_score = 20;
+const uint8_t y_pos_score = 60;
 const size_t kScoreBufferSize = 20;
 void drawScore(void) {
   char scorebuffer[kScoreBufferSize];
@@ -104,8 +104,8 @@ void drawScore(void) {
   u8g2.drawStr(x_pos_score, y_pos_score, scorebuffer);
 }
 
-const int x_pos_hiscore = 0;
-const int y_pos_hiscore = 20;
+const uint8_t x_pos_hiscore = 0;
+const uint8_t y_pos_hiscore = 20;
 void drawHiscoreScreen(void) {
   u8g2.drawStr(x_pos_hiscore, y_pos_hiscore, "HI SCORES");
   // TODO: draw hi scores
