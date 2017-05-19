@@ -63,11 +63,11 @@ inline void nextGameState() {
 
 void drawPlayer(uint16_t y = 0) {
   int16_t y_position_from_ground = kScreenHeight - player_asset.getHeight() - y;
-  int16_t player_x = ((kScreenWidth / 3) - (player_asset.getHeight() / 2));
+  int16_t player_x = ((kScreenWidth / 3) - (player_asset.getWidth() / 2));
   u8g2.drawXBM(
     player_x,
     y_position_from_ground,
-    player_asset.getHeight(),
+    player_asset.getWidth(),
     player_asset.getHeight(),
     player_asset.getBitmap());
 }
