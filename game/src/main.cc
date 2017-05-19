@@ -77,7 +77,7 @@ void drawObstacles() {
 }
 
 
-void drawBootupScreen(void) {
+void drawBootupScreen() {
   int16_t logoMiddleX = (kScreenWidth / 2) - (bootup_width / 2);
   int16_t logoMiddleY = (kScreenHeight / 2) - (bootup_height / 2);
   u8g2.drawXBM(
@@ -90,7 +90,7 @@ void drawBootupScreen(void) {
 
 const uint8_t x_pos_gameover = 20;
 const uint8_t y_pos_gameover = 20;
-void drawGameOver(void) {
+void drawGameOver() {
   u8g2.drawStr(x_pos_gameover, y_pos_gameover, "GAME OVER");
   // TODO: draw fancy asset?
 }
@@ -98,7 +98,7 @@ void drawGameOver(void) {
 const uint8_t x_pos_score = 20;
 const uint8_t y_pos_score = 60;
 const size_t kScoreBufferSize = 20;
-void drawScore(void) {
+void drawScore() {
   char scorebuffer[kScoreBufferSize];
   snprintf(scorebuffer, kScoreBufferSize, "Score: %u", player.getScore());
   u8g2.drawStr(x_pos_score, y_pos_score, scorebuffer);
@@ -106,12 +106,12 @@ void drawScore(void) {
 
 const uint8_t x_pos_hiscore = 0;
 const uint8_t y_pos_hiscore = 20;
-void drawHiscoreScreen(void) {
+void drawHiscoreScreen() {
   u8g2.drawStr(x_pos_hiscore, y_pos_hiscore, "HI SCORES");
   // TODO: draw hi scores
 }
 
-bool collisionDetected(void) {
+bool collisionDetected() {
   /*
   if player_right_x_position >= obstacle_left_x_position and
     player_left_x_position <= obstacle_right_x_position
@@ -122,7 +122,7 @@ bool collisionDetected(void) {
   return player.getScore() > (unsigned)random(100, 250);
 }
 
-void updateObstaclePosition(void) {
+void updateObstaclePosition() {
   // TODO
 }
 
