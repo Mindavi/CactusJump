@@ -133,6 +133,12 @@ void jump(void) {
   player_y_velocity = jump_velocity;
 }
 
+void resetGame() {
+  player_y_position = 0;
+  player_y_velocity = 0;
+  distance_traveled = 0;
+}
+
 void loop(void) {
   // in the loop so it's only true once, after this it's false again.
   //This is so it won't think the button is pressed again every loop.
@@ -192,6 +198,7 @@ void loop(void) {
         drawGameOver();
         drawScore();
         if (buttonPressed) {
+          resetGame();
           nextGameState();
         }
         break;
