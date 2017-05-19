@@ -26,7 +26,7 @@ const int jump_velocity = 8;
 // global game state
 gameState game_state = start;
 int16_t player_y_position = 0; // 0 is on the ground, negative is invalid
-int16_t player_y_velocity = 0; // positive is going up, negative is gravity
+int16_t player_y_velocity = 0; // positive is going up, negative is falling down
 uint32_t distance_traveled = 0; // start at 0, represents score
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
@@ -36,6 +36,7 @@ Bounce button;
 void setup(void) {
   u8g2.begin();
   u8g2.setFlipMode(0);
+  u8g2.setFont(u8g2_font_artossans8_8r);
   pinMode(buttonPin, INPUT_PULLUP);
   button.attach(buttonPin);
   button.interval(10);
@@ -64,15 +65,15 @@ void drawBootupScreen(void)
   u8g2.drawXBM(logoMiddleHorizontal, logoMiddleVertical, bootup_width, bootup_height, bootup_bits);
 }
 
-const int x_pos_gameover = 40;
+const int x_pos_gameover = 20;
 const int y_pos_gameover = 20;
 void drawGameOver(void) {
   u8g2.drawStr(x_pos_gameover, y_pos_gameover, "GAME OVER");
   // TODO: draw fancy asset?
 }
 
-const int x_pos_score = 80;
-const int y_pos_score = 20;
+const int x_pos_score = 20;
+const int y_pos_score = 60;
 const size_t score_buffer_size = 20;
 void drawScore(void) {
   char scorebuffer[score_buffer_size];
@@ -80,7 +81,10 @@ void drawScore(void) {
   u8g2.drawStr(x_pos_score, y_pos_score, scorebuffer);
 }
 
+const int x_pos_hiscore = 0;
+const int y_pos_hiscore = 20;
 void drawHiscoreScreen(void) {
+  u8g2.drawStr(x_pos_hiscore, y_pos_hiscore, "HI SCORES");
   // TODO: draw hi scores
 }
 
@@ -91,8 +95,8 @@ bool collisionDetected(void) {
     player_bottom_y_position <= obstacle_top_y_position
   */
 
-  // TODO: implement algorithm, remove 'timer'
-  return distance_traveled > 500;
+  // TODO: implement algorithm, remove auto logic
+  return distance_traveled > random(100, 250);
 }
 
 inline bool playerOnGround(void) {
