@@ -21,7 +21,7 @@ const int screenHeight = 64;
 
 // for the jumping algorithm
 const int gravity = 1;
-const int jump_velocity = 10;
+const int jump_velocity = 8;
 
 // global game state
 gameState game_state = start;
@@ -91,8 +91,8 @@ bool collisionDetected(void) {
     player_bottom_y_position <= obstacle_top_y_position
   */
 
-  // TODO: implement algorithm, remove random
-  return random(1000) == 321;
+  // TODO: implement algorithm, remove 'timer'
+  return distance_traveled > 500;
 }
 
 inline bool playerOnGround(void) {
@@ -105,7 +105,7 @@ void updatePlayerYPosition(void) {
     player_y_velocity = 0;
     return;
   }
-  else if (player_y_velocity != 0) {
+  else if (!playerOnGround() || player_y_velocity > 0) {
     // increment height with velocity, also if velocity is negative (falling)
     player_y_position += player_y_velocity;
     if (player_y_position < 0) {
