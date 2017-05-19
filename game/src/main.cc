@@ -101,7 +101,7 @@ void drawScore() {
   static const uint8_t kScoreY = 60;
   static const size_t kScoreBufferSize = 20;
   char score_buffer[kScoreBufferSize];
-  snprintf(scorebuffer, kScoreBufferSize, "Score: %u", player.getScore());
+  snprintf(score_buffer, kScoreBufferSize, "Score: %u", player.getScore());
   u8g2.drawStr(kScoreX, kScoreY, score_buffer);
 }
 
@@ -141,13 +141,10 @@ void loop(void) {
     Serial.println("Button update");
   }
 
-  // clear buffer to start drawing
-  u8g2.clearBuffer();
-
+  // update game logic
   switch (game_state) {
     case start:
       {
-        drawBootupScreen();
         if (buttonPressed) {
           nextGameState();
         }
@@ -155,7 +152,6 @@ void loop(void) {
       }
     case hiscore:
       {
-        drawHiscoreScreen();
         if (buttonPressed) {
           nextGameState();
         }
@@ -171,8 +167,6 @@ void loop(void) {
 
         player.updateYPosition();
         updateObstaclePosition();
-        drawPlayer(player.getYPosition());
-        drawObstacles();
 
         if (collisionDetected()) {
           nextGameState();
@@ -199,6 +193,29 @@ void loop(void) {
         break;
       }
   }
+
+  // clear buffer to start drawing
+  u8g2.clearBuffer();
+
+  // update graphics
+  switch (game_state) {
+    case start:
+    {
+      drawBootupScreen();
+      break;
+    }
+    case hiscore:
+    {
+      drawHiscoreScreen();
+      break;
+    }
+    case play:
+    {
+      drawPlayer(player.getYPosition());
+      drawObstacles();
+    }
+  }
+
   // draw everything on the screen
   u8g2.sendBuffer();
 }
