@@ -88,26 +88,27 @@ void drawBootupScreen() {
     bootup_bits);
 }
 
-const uint8_t x_pos_gameover = 20;
-const uint8_t y_pos_gameover = 20;
 void drawGameOver() {
+  static const uint8_t x_pos_gameover = 20;
+  static const uint8_t y_pos_gameover = 20;
   u8g2.drawStr(x_pos_gameover, y_pos_gameover, "GAME OVER");
   // TODO: draw fancy asset?
 }
 
-const uint8_t x_pos_score = 20;
-const uint8_t y_pos_score = 60;
-const size_t kScoreBufferSize = 20;
+
 void drawScore() {
-  char scorebuffer[kScoreBufferSize];
+  static const uint8_t kScoreX = 20;
+  static const uint8_t kScoreY = 60;
+  static const size_t kScoreBufferSize = 20;
+  char score_buffer[kScoreBufferSize];
   snprintf(scorebuffer, kScoreBufferSize, "Score: %u", player.getScore());
-  u8g2.drawStr(x_pos_score, y_pos_score, scorebuffer);
+  u8g2.drawStr(kScoreX, kScoreY, score_buffer);
 }
 
-const uint8_t x_pos_hiscore = 0;
-const uint8_t y_pos_hiscore = 20;
+const uint8_t kHiscoreX = 0;
+const uint8_t kHiscoreY = 20;
 void drawHiscoreScreen() {
-  u8g2.drawStr(x_pos_hiscore, y_pos_hiscore, "HI SCORES");
+  u8g2.drawStr(kHiscoreX, kHiscoreY, "HI SCORES");
   // TODO: draw hi scores
 }
 
