@@ -29,7 +29,7 @@ gameState game_state = start;
 // The player in the game
 Player player;
 
-// Asset
+// Assets
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
 
