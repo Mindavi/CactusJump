@@ -2,10 +2,10 @@
 #define GAME_LIB_STATE_GAME_STATE_H_
 
 enum GameState {
-  start,
-  hiscore,
-  play,
-  gameOver
+  kStart,
+  kHiscore,
+  kPlay,
+  kGameOver
 };
 
 #endif  // GAME_LIB_STATE_GAME_STATE_H_

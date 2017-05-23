@@ -24,7 +24,7 @@ const uint8_t kScreenWidth = 128;
 const uint8_t kScreenHeight = 64;
 
 // Global game state
-GameState game_state = start;
+GameState game_state = kStart;
 
 // The player in the game
 Player player;
@@ -58,7 +58,7 @@ void setup(void) {
 
 
 inline void nextGameState() {
-  game_state = static_cast<GameState>((game_state + 1) % (gameOver + 1));
+  game_state = static_cast<GameState>((game_state + 1) % (kGameOver + 1));
 }
 
 void drawPlayer(uint16_t y = 0) {
@@ -133,21 +133,21 @@ void resetGame() {
 
 void updateGameLogic(bool button_pressed) {
   switch (game_state) {
-    case start:
+    case kStart:
       {
         if (button_pressed) {
           nextGameState();
         }
         break;
       }
-    case hiscore:
+    case kHiscore:
       {
         if (button_pressed) {
           nextGameState();
         }
         break;
       }
-    case play:
+    case kPlay:
       {
         if (button_pressed) {
           if (player.onGround()) {
@@ -167,7 +167,7 @@ void updateGameLogic(bool button_pressed) {
         player.updateScore();
         break;
       }
-    case gameOver:
+    case kGameOver:
       {
         if (button_pressed) {
           resetGame();
@@ -189,23 +189,23 @@ void updateGameGraphics() {
 
   // update graphics
   switch (game_state) {
-    case start:
+    case kStart:
       {
         drawBootupScreen();
         break;
       }
-    case hiscore:
+    case kHiscore:
       {
         drawHiscoreScreen();
         break;
       }
-    case play:
+    case kPlay:
       {
         drawPlayer(player.getYPosition());
         drawObstacles();
         break;
       }
-    case gameOver:
+    case kGameOver:
       {
         drawGameOver();
         drawScore();
