@@ -1,7 +1,7 @@
 #ifndef GAME_LIB_STATE_GAME_STATE_H_
 #define GAME_LIB_STATE_GAME_STATE_H_
 
-enum gameState {
+enum GameState {
   start,
   hiscore,
   play,

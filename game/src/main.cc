@@ -24,7 +24,7 @@ const uint8_t kScreenWidth = 128;
 const uint8_t kScreenHeight = 64;
 
 // Global game state
-gameState game_state = start;
+GameState game_state = start;
 
 // The player in the game
 Player player;
@@ -58,7 +58,7 @@ void setup(void) {
 
 
 inline void nextGameState() {
-  game_state = static_cast<gameState>((game_state + 1) % (gameOver + 1));
+  game_state = static_cast<GameState>((game_state + 1) % (gameOver + 1));
 }
 
 void drawPlayer(uint16_t y = 0) {
