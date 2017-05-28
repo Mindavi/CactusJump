@@ -3,22 +3,32 @@
 
 #include "player.h"
 #include "asset.h"
-#include "state.h"
+#include "game_state.h"
+#include <U8g2lib.h>
 
 class Game {
  public:
-  Game(Asset player_asset, Asset* object_assets, uint8_t object_assets_length);
+  Game(Asset bootup_screen,
+    Asset player_asset,
+    Asset* object_assets,
+    uint8_t object_assets_length,
+    U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
   void Draw();
   void Update(bool button_pressed);
   uint32_t GetScore();
+
  private:
+  Asset m_bootup_screen;
   Asset m_player_asset;
   Asset* m_object_assets;
   uint8_t m_object_assets_length;
   Player m_player;
   GameState m_state;
   uint32_t m_distance_traveled;  // represents score
+  U8G2_SSD1306_128X64_NONAME_F_HW_I2C* m_renderer;
   static const uint8_t kScorePerTick = 1;
+  static const uint8_t kScreenWidth = 128;
+  static const uint8_t kScreenHeight = 64;
   void Start(bool button_pressed);
   void Hiscore(bool button_pressed);
   void Play(bool button_pressed);
@@ -26,6 +36,12 @@ class Game {
   void NextGameState();
   void UpdateObstaclePositions();
   bool CollisionDetected();
+  void DrawBootupScreen();
+  void DrawHiscoreScreen();
+  void DrawPlayer();
+  void DrawObstacles();
+  void DrawGameOver();
+  void DrawScore();
 };
 
 #endif  // GAME_LIB_GAME_GAME_H_
