@@ -144,13 +144,15 @@ void Game::DrawPlayer() {
 
 void Game::DrawObstacles() {
   for (size_t i = 0; i < m_object_assets_length; i++) {
-    m_object_assets[i].Draw(50, 70, m_renderer);
+    int16_t y_position_from_ground = kScreenHeight -
+                                      m_object_assets[i].getHeight();
+    int16_t x_position = ((kScreenWidth / 3) * 2 -
+                          (m_object_assets[i].getWidth() / 2));
+    m_object_assets[i].Draw(x_position, y_position_from_ground, m_renderer);
   }
 }
 
-void Game::DrawGameOver() {
-
-}
+void Game::DrawGameOver() {}
 
 void Game::DrawScore() {
   static const uint8_t kScoreX = 20;
