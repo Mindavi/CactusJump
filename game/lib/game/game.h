@@ -10,12 +10,15 @@ class Game {
   Game(Asset player_asset, Asset* object_assets, uint8_t object_assets_length);
   void Draw();
   void Update(bool button_pressed);
+  uint32_t GetScore();
  private:
   Asset m_player_asset;
   Asset* m_object_assets;
   uint8_t m_object_assets_length;
   Player m_player;
   GameState m_state;
+  uint32_t m_distance_traveled;  // represents score
+  static const uint8_t kScorePerTick = 1;
   void Start(bool button_pressed);
   void Hiscore(bool button_pressed);
   void Play(bool button_pressed);

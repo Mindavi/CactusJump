@@ -4,7 +4,8 @@ Game(Asset player_asset, Asset* object_assets, uint8_t object_assets_length)
   : m_player_asset(player_asset),
     m_object_assets(object_assets),
     m_object_assets_length(object_assets_length),
-    m_state(start) {}
+    m_state(start),
+    m_distance_traveled(0) {}
 
 void Game::NextGameState() {
   m_state = static_cast<GameState>((m_state + 1) % (kGameOver + 1));
@@ -59,6 +60,7 @@ void Game::Play(bool button_pressed) {
     NextGameState();
     break;
   }
+  m_distance_traveled += 1;
 }
 
 void Game::GameOver(bool button_pressed) {
@@ -72,4 +74,8 @@ void Game::UpdateObstaclePositions() {
 bool Game::CollisionDetected() {
   // detect collisions
   return false;
+}
+
+uint32_t Game::GetScore() {
+  return m_distance_traveled * kScorePerTick;
 }

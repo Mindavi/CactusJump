@@ -103,7 +103,7 @@ void drawScore() {
   static const uint8_t kScoreY = 60;
   static const size_t kScoreBufferSize = 20;
   char score_buffer[kScoreBufferSize];
-  snprintf(score_buffer, kScoreBufferSize, "Score: %u", player.getScore());
+  snprintf(score_buffer, kScoreBufferSize, "Score: %u", 0);  // TODO: score
   u8g2.drawStr(kScoreX, kScoreY, score_buffer);
 }
 
@@ -121,8 +121,7 @@ bool collisionDetected() {
     player_bottom_y_position <= obstacle_top_y_position
   */
 
-  // TODO: implement algorithm, remove auto logic
-  return player.getScore() > (unsigned)random(100, 250);
+  return false;  // collisions never happen
 }
 
 void updateObstaclePosition() {
@@ -152,21 +151,19 @@ void updateGameLogic(bool button_pressed) {
     case kPlay:
       {
         if (button_pressed) {
-          if (player.onGround()) {
-            player.jump();
+          if (player.OnGround()) {
+            player.Jump();
           }
         }
 
-        player.updateYPosition();
+        player.UpdateYPosition();
         updateObstaclePosition();
 
         if (collisionDetected()) {
           nextGameState();
           break;
         }
-        // happens after collision detection, so score will only get higher
-        // if player does not collide
-        player.updateScore();
+
         break;
       }
     case kGameOver:
@@ -203,7 +200,7 @@ void updateGameGraphics() {
       }
     case kPlay:
       {
-        drawPlayer(player.getYPosition());
+        drawPlayer(player.GetYPosition());
         drawObstacles();
         break;
       }
