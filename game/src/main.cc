@@ -12,6 +12,7 @@
 #include "asset.h"
 #include "player.h"
 #include "object.h"
+#include "game.h"
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -31,6 +32,7 @@ GameState game_state = kStart;
 Player player;
 
 // Assets
+Asset bootup_screen(bootup_width, bootup_height, bootup_bits);
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
 Asset object(object_width, object_height, object_bits);
@@ -39,6 +41,8 @@ Asset object(object_width, object_height, object_bits);
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 Bounce button;
+
+Game game(bootup_screen, player_asset, &object, 1, &u8g2);
 
 void setupButton() {
   pinMode(kButtonPin, INPUT_PULLUP);
@@ -230,7 +234,6 @@ void loop(void) {
     buttonPressed = button.read();
     Serial.println("Button update");
   }
-
-  updateGameLogic(buttonPressed);
-  updateGameGraphics();
+  game.Update(buttonPressed);
+  game.Draw();
 }
