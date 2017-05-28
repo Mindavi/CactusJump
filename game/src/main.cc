@@ -11,6 +11,7 @@
 #include "game_state.h"
 #include "asset.h"
 #include "player.h"
+#include "object.h"
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -32,6 +33,7 @@ Player player;
 // Assets
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
+Asset object(object_width, object_height, object_bits);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
