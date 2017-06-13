@@ -21,8 +21,7 @@ install:
   - pip install -U platformio
 
 script:
-  - cd game
-  - cppcheck --enable=warning src/*.cpp -q --force -I src --include=src/*.h --error-exitcode=1
+  - cppcheck --enable=warning src/main.cc -q --force -I src lib --include=lib/* --error-exitcode=1
   - platformio run -s
 
 notifications:

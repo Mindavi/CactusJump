@@ -1,2 +1,6 @@
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
 failed
 cpplint.py
