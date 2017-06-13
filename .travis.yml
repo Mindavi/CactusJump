@@ -22,7 +22,7 @@ install:
 
 script:
   - cppcheck --enable=warning src/main.cc -q --force -I src lib --include=lib/* --error-exitcode=1
-  - platformio run
+  - platformio run -s
 
 notifications:
   email: false
