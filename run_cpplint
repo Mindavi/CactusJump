@@ -1,1 +1,2 @@
+#!/bin/bash
 cpplint --quiet --recursive lib --recursive src 
