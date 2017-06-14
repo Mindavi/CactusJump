@@ -8,7 +8,8 @@ dist: trusty
 sudo: false
 
 cache:
-  pip
+  apt: true
+  pip: true
   directories:
   - "~/.platformio"
   - "./.pioenvs"
