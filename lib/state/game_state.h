@@ -1,5 +1,5 @@
-#ifndef GAME_LIB_STATE_GAME_STATE_H_
-#define GAME_LIB_STATE_GAME_STATE_H_
+#ifndef LIB_STATE_GAME_STATE_H_
+#define LIB_STATE_GAME_STATE_H_
 
 enum GameState {
   kStart,
@@ -8,4 +8,4 @@ enum GameState {
   kGameOver
 };
 
-#endif  // GAME_LIB_STATE_GAME_STATE_H_
+#endif  // LIB_STATE_GAME_STATE_H_

@@ -1,5 +1,5 @@
-#ifndef GAME_LIB_GAME_GAME_H_
-#define GAME_LIB_GAME_GAME_H_
+#ifndef LIB_GAME_GAME_H_
+#define LIB_GAME_GAME_H_
 
 #include "player.h"
 #include "asset.h"
@@ -44,4 +44,4 @@ class Game {
   void DrawScore();
 };
 
-#endif  // GAME_LIB_GAME_GAME_H_
+#endif  // LIB_GAME_GAME_H_

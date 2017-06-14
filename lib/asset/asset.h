@@ -1,5 +1,5 @@
-#ifndef GAME_LIB_ASSET_ASSET_H_
-#define GAME_LIB_ASSET_ASSET_H_
+#ifndef LIB_ASSET_ASSET_H_
+#define LIB_ASSET_ASSET_H_
 
 #include <cinttypes>
 #include <U8g2lib.h>
@@ -19,4 +19,4 @@ class Asset {
   unsigned char* m_bitmap;
 };
 
-#endif  // GAME_LIB_ASSET_ASSET_H_
+#endif  // LIB_ASSET_ASSET_H_

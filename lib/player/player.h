@@ -1,5 +1,5 @@
-#ifndef GAME_LIB_PLAYER_PLAYER_H_
-#define GAME_LIB_PLAYER_PLAYER_H_
+#ifndef LIB_PLAYER_PLAYER_H_
+#define LIB_PLAYER_PLAYER_H_
 
 #include <cinttypes>
 
@@ -19,4 +19,4 @@ class Player {
   static const uint8_t kJumpVelocity = 8;
 };
 
-#endif  // GAME_LIB_PLAYER_PLAYER_H_
+#endif  // LIB_PLAYER_PLAYER_H_
