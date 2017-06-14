@@ -24,7 +24,7 @@ install:
 
 script:
   - cppcheck --enable=warning src/main.cc -q --force -I src lib --include=lib/* --error-exitcode=1
-  - ./run_cpplint
+  - cpplint --quiet --recursive lib --recursive src 
   - platformio run -s
 
 notifications:

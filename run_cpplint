@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cpplint --quiet --recursive lib --recursive src 
+cpplint --recursive lib --recursive src 
