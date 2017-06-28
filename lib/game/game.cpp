@@ -9,6 +9,7 @@ Game::Game(Asset bootup_screen,
     m_player_asset(player_asset),
     m_object_assets(object_assets),
     m_object_assets_length(object_assets_length),
+    m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2)),
     m_state(kStart),
     m_distance_traveled(0),
     m_renderer(renderer) {}
@@ -122,8 +123,8 @@ uint32_t Game::GetScore() {
 }
 
 void Game::DrawBootupScreen() {
-  int16_t logoMiddleX = (kScreenWidth / 2) - (m_bootup_screen.getWidth() / 2);
-  int16_t logoMiddleY = (kScreenHeight / 2) - (m_bootup_screen.getHeight()/ 2);
+  int16_t logoMiddleX = (kScreenWidth / 2) - (m_bootup_screen.GetWidth() / 2);
+  int16_t logoMiddleY = (kScreenHeight / 2) - (m_bootup_screen.GetHeight()/ 2);
   m_bootup_screen.Draw(logoMiddleX, logoMiddleY, m_renderer);
 }
 
@@ -136,7 +137,7 @@ void Game::DrawHiscoreScreen() {
 
 void Game::DrawPlayer() {
   int16_t y_position = m_player.GetYPosition();
-  int16_t player_x = ((kScreenWidth / 3) - (m_player_asset.getWidth() / 2));
+  int16_t player_x = ((kScreenWidth / 3) - (m_player_asset.GetWidth() / 2));
   m_player_asset.Draw(player_x, y_position, m_renderer);
 }
 
@@ -144,7 +145,7 @@ void Game::DrawObstacles() {
   for (size_t i = 0; i < m_object_assets_length; i++) {
     int16_t y_position = 0;
     int16_t x_position = ((kScreenWidth / 3) * 2 -
-                          (m_object_assets[i].getWidth() / 2));
+                          (m_object_assets[i].GetWidth() / 2));
     m_object_assets[i].Draw(x_position, y_position, m_renderer);
   }
 }

@@ -1,6 +1,7 @@
 #include "player.h"
 
-Player::Player() {}
+Player::Player(int16_t x_position)
+  : m_x_position(x_position) {}
 
 void Player::Jump() {
   m_y_velocity = kJumpVelocity;
@@ -26,6 +27,10 @@ void Player::UpdateYPosition() {
   }
 }
 
-int16_t Player::GetYPosition() {
+int16_t Player::GetYPosition() const {
   return m_y_position;
+}
+
+int16_t Player::GetXPosition() const {
+  return m_x_position;
 }

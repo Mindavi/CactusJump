@@ -7,9 +7,9 @@
 class Asset {
  public:
   Asset(uint16_t width, uint16_t height, unsigned char* bitmap);
-  uint16_t getWidth();
-  uint16_t getHeight();
-  unsigned char* getBitmap();
+  uint16_t GetWidth() const;
+  uint16_t GetHeight() const;
+  unsigned char* GetBitmap() const;
   void Draw(uint16_t x,
     uint16_t y,
     U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
