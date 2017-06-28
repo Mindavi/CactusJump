@@ -9,7 +9,7 @@
 // assets
 #include "logo.xbm"
 #include "player.xbm"
-#include "object.xbm"
+#include "obstacle.xbm"
 
 #include "game_state.h"
 #include "asset.h"
@@ -36,7 +36,7 @@ Player player;
 Asset bootup_screen(bootup_width, bootup_height, bootup_bits);
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
-Asset object(object_width, object_height, object_bits);
+Asset object(obstacle_width, obstacle_height, obstacle_bits);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
