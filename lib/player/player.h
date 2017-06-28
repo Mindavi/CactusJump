@@ -16,7 +16,7 @@ class Player {
 
   // for the jumping algorithm
   static const uint8_t kGravity = 1;
-  static const uint8_t kJumpVelocity = 8;
+  static const uint8_t kJumpVelocity = 9;
 };
 
 #endif  // LIB_PLAYER_PLAYER_H_
