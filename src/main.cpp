@@ -36,16 +36,16 @@ Player player;
 Asset bootup_screen(bootup_width, bootup_height, bootup_bits);
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
-Asset object(obstacle_width, obstacle_height, obstacle_bits);
+Asset obstacle(obstacle_width, obstacle_height, obstacle_bits);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 Bounce button;
 
-Asset object_assets[] = {object};
-const size_t objects_size = sizeof(object_assets) / sizeof(object_assets[0]);
-Game game(bootup_screen, player_asset, &object, objects_size, &u8g2);
+Asset obstacle_assets[] = {obstacle};
+const size_t obstacle_assets_size = sizeof(obstacle_assets) / sizeof(obstacle_assets[0]);
+Game game(bootup_screen, player_asset, obstacle_assets, obstacle_assets_size, &u8g2);
 
 void setupButton() {
   pinMode(kButtonPin, INPUT_PULLUP);
