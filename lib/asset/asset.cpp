@@ -17,7 +17,8 @@ unsigned char* Asset::getBitmap() {
   return m_bitmap;
 }
 
-void Asset::Draw(uint16_t x,
+void Asset::Draw(
+  uint16_t x,
   uint16_t y,
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer) {
     renderer->drawXBM(
