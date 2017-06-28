@@ -6,12 +6,14 @@
 #include <Bounce2.h>
 #include <U8g2lib.h>
 
-#include "logo.h"
-#include "player_dick.h"
+// assets
+#include "logo.xbm"
+#include "player.xbm"
+#include "object.xbm"
+
 #include "game_state.h"
 #include "asset.h"
 #include "player.h"
-#include "object.h"
 #include "game.h"
 
 #ifdef U8X8_HAVE_HW_SPI
@@ -42,7 +44,9 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 Bounce button;
 
-Game game(bootup_screen, player_asset, &object, 1, &u8g2);
+Asset object_assets[] = {object};
+const size_t objects_size = sizeof(object_assets) / sizeof(object_assets[0]);
+Game game(bootup_screen, player_asset, &object, objects_size, &u8g2);
 
 void setupButton() {
   pinMode(kButtonPin, INPUT_PULLUP);
