@@ -15,6 +15,7 @@
 #include "asset.h"
 #include "player.h"
 #include "game.h"
+#include "screen_info.h"
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -24,8 +25,6 @@
 #endif
 
 const uint8_t kButtonPin = D3;
-const uint8_t kScreenWidth = 128;
-const uint8_t kScreenHeight = 64;
 
 // Global game state
 GameState game_state = kStart;
@@ -64,6 +63,7 @@ void setup(void) {
   setupGraphics();
   setupButton();
   Serial.begin(115200);
+  delay(1000);
 }
 
 void loop(void) {

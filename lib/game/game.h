@@ -4,6 +4,7 @@
 #include "player.h"
 #include "asset.h"
 #include "game_state.h"
+#include "screen_info.h"
 #include <U8g2lib.h>
 
 class Game {
@@ -27,8 +28,6 @@ class Game {
   uint32_t m_distance_traveled;  // represents score
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* m_renderer;
   static const uint8_t kScorePerTick = 1;
-  static const uint8_t kScreenWidth = 128;
-  static const uint8_t kScreenHeight = 64;
   void Start(bool button_pressed);
   void Hiscore(bool button_pressed);
   void Play(bool button_pressed);
