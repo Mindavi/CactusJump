@@ -21,7 +21,9 @@ class Player {
   bool OnGround();
   int16_t GetYPosition() const;
   int16_t GetXPosition() const;
-  void Draw(U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
+  template <typename TRenderer> void Draw(TRenderer *renderer) {
+    m_asset.Draw(GetXPosition(), GetYPosition(), renderer);
+  }
  private:
   int16_t m_y_position = 0;  // 0 is on the ground, negative is invalid
   int16_t m_x_position = 0;
