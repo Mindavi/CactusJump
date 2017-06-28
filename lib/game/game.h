@@ -21,7 +21,6 @@ class Game {
 
  private:
   Asset m_bootup_screen;
-  Asset m_player_asset;
   Asset* m_object_assets;
   uint8_t m_object_assets_length;
   Player m_player;

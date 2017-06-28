@@ -6,10 +6,9 @@ Game::Game(Asset bootup_screen,
   uint8_t object_assets_length,
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer)
   : m_bootup_screen(bootup_screen),
-    m_player_asset(player_asset),
     m_object_assets(object_assets),
     m_object_assets_length(object_assets_length),
-    m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2)),
+    m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2), player_asset),
     m_state(kStart),
     m_distance_traveled(0),
     m_renderer(renderer) {}
@@ -136,9 +135,7 @@ void Game::DrawHiscoreScreen() {
 }
 
 void Game::DrawPlayer() {
-  int16_t y_position = m_player.GetYPosition();
-  int16_t player_x = ((kScreenWidth / 3) - (m_player_asset.GetWidth() / 2));
-  m_player_asset.Draw(player_x, y_position, m_renderer);
+  m_player.Draw(m_renderer);
 }
 
 void Game::DrawObstacles() {

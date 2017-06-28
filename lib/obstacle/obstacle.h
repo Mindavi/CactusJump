@@ -6,7 +6,7 @@
 
 class Obstacle {
  public:
-  Obstacle();
+  explicit Obstacle(Asset obstacle_asset);
   ~Obstacle() {}
   void UpdateYPosition();
   int16_t GetYPosition() const;

@@ -1,18 +1,27 @@
 #ifndef LIB_PLAYER_PLAYER_H_
 #define LIB_PLAYER_PLAYER_H_
 
+// own lib
 #include "screen_info.h"
+#include "asset.h"
+
+// external libs
+#include <U8g2lib.h>
+
+// c lib
 #include <cinttypes>
+
 
 class Player {
  public:
-  explicit Player(int16_t x_position);
+  explicit Player(int16_t x_position, Asset asset);
   ~Player() {}
   void Jump();
   void UpdateYPosition();
   bool OnGround();
   int16_t GetYPosition() const;
   int16_t GetXPosition() const;
+  void Draw(U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
  private:
   int16_t m_y_position = 0;  // 0 is on the ground, negative is invalid
   int16_t m_x_position = 0;
@@ -21,6 +30,9 @@ class Player {
   // for the jumping algorithm
   static const uint8_t kGravity = 1;
   static const uint8_t kJumpVelocity = 9;
+
+  // asset
+  Asset m_asset;
 };
 
 #endif  // LIB_PLAYER_PLAYER_H_

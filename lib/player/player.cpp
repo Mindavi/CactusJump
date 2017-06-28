@@ -1,7 +1,9 @@
 #include "player.h"
 
-Player::Player(int16_t x_position)
-  : m_x_position(x_position) {}
+Player::Player(int16_t x_position, Asset asset)
+  : m_x_position(x_position),
+    m_asset(asset)
+{}
 
 void Player::Jump() {
   m_y_velocity = kJumpVelocity;
@@ -25,6 +27,10 @@ void Player::UpdateYPosition() {
     // subtract gravity from velocity
     m_y_velocity -= kGravity;
   }
+}
+
+void Player::Draw(U8G2_SSD1306_128X64_NONAME_F_HW_I2C *renderer) {
+  m_asset.Draw(GetXPosition(), GetYPosition(), renderer);
 }
 
 int16_t Player::GetYPosition() const {
