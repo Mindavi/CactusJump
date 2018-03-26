@@ -79,6 +79,7 @@ void Game::Update(bool button_pressed) {
 
 void Game::Start(bool button_pressed) {
   if (button_pressed) {
+    m_distance_traveled = 0;
     NextGameState();
   }
 }
