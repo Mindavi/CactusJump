@@ -1,6 +1,6 @@
 language: python
 python:
-  - '2.7'
+  - '3.6'
 
 #we want a newer cppcheck, so use trusty
 dist: trusty
