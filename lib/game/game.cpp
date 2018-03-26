@@ -48,6 +48,8 @@ void Game::Draw() {
     default:
       {
         Serial.println("invalid game state");
+	// Restart the game if game state becomes invalid
+	m_state = kStart;
         break;
       }
   }
@@ -105,7 +107,9 @@ void Game::Play(bool button_pressed) {
 }
 
 void Game::GameOver(bool button_pressed) {
-  // End of game?
+  if (button_pressed) {
+    NextGameState();
+  }
 }
 
 void Game::UpdateObstaclePositions() {
@@ -147,7 +151,9 @@ void Game::DrawObstacles() {
   }
 }
 
-void Game::DrawGameOver() {}
+void Game::DrawGameOver() {
+  // maybe unneeded, DrawScore() is called when game over
+}
 
 void Game::DrawScore() {
   static const uint8_t kScoreX = 20;
