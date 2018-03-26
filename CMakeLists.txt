@@ -12,28 +12,16 @@ if(MSVC)
     #vc 2012 fix for vararg templates
     set(MSVC_COMPILER_DEFS "-D_VARIADIC_MAX=10")
 endif() 
-#-------------------
+
 # set common include folder for module
-#-------------------
 set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/lib/asset ${PROJECT_SOURCE_DIR}/lib/obstacle ${PROJECT_SOURCE_DIR}/lib/player ${PROJECT_SOURCE_DIR}/lib/shared)
 MESSAGE(STATUS "COMMON_INCLUDES: " ${COMMON_INCLUDES})
 
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
 
-#-------------------
-# Module source
-#-------------------
-#set(PROJECT_LIB_NAME ${PROJECT_NAME_STR}_impl)
-
-#include_directories(${COMMON_INCLUDES})
-#file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
-#add_library(${PROJECT_LIB_NAME} ${SRC_FILES})
-
 add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
 
-#-------------------
-# Test
-#-------------------
+# GTest
 add_definitions(${MSVC_COMPILER_DEFS})
 enable_testing()
 set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
@@ -60,8 +48,7 @@ else()
         )
 endif()
 
+# Build shared library and link it to test project
 add_subdirectory(lib)
-
 target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT} CactusJump)
 
-add_test(asset_test ${PROJECT_TEST_NAME})
