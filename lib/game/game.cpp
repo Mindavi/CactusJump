@@ -2,12 +2,12 @@
 
 Game::Game(Asset bootup_screen,
   Asset player_asset,
-  Asset* object_assets,
-  uint8_t object_assets_length,
+  Obstacle* obstacles,
+  uint8_t obstacles_length,
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer)
   : m_bootup_screen(bootup_screen),
-    m_object_assets(object_assets),
-    m_object_assets_length(object_assets_length),
+    m_obstacles(obstacles),
+    m_obstacles_length(obstacles_length),
     m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2), player_asset),
     m_state(kStart),
     m_distance_traveled(0),
@@ -114,7 +114,9 @@ void Game::GameOver(bool button_pressed) {
 }
 
 void Game::UpdateObstaclePositions() {
-  // update positions
+  for (ssize_t i = 0; i < m_obstacles_length; i++) {
+    m_obstacles[i].UpdateXPosition();
+  }   
 }
 
 bool Game::CollisionDetected() {
@@ -144,11 +146,8 @@ void Game::DrawPlayer() {
 }
 
 void Game::DrawObstacles() {
-  for (size_t i = 0; i < m_object_assets_length; i++) {
-    int16_t y_position = 0;
-    int16_t x_position = ((kScreenWidth / 3) * 2 -
-                          (m_object_assets[i].GetWidth() / 2));
-    m_object_assets[i].Draw(x_position, y_position, m_renderer);
+  for (size_t i = 0; i < m_obstacles_length; i++) { 
+    m_obstacles[i].Draw(m_renderer);
   }
 }
 

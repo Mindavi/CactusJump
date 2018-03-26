@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "asset.h"
+#include "obstacle.h"
 #include "game_state.h"
 #include "screen_info.h"
 #include <U8g2lib.h>
@@ -11,8 +12,8 @@ class Game {
  public:
   Game(Asset bootup_screen,
     Asset player_asset,
-    Asset* object_assets,
-    uint8_t object_assets_length,
+    Obstacle* obstacles,
+    uint8_t obstacles_length,
     U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
   ~Game() {}
   void Draw();
@@ -21,8 +22,8 @@ class Game {
 
  private:
   Asset m_bootup_screen;
-  Asset* m_object_assets;
-  uint8_t m_object_assets_length;
+  Obstacle* m_obstacles;
+  uint8_t m_obstacles_length;
   Player m_player;
   GameState m_state;
   uint32_t m_distance_traveled;  // represents score
