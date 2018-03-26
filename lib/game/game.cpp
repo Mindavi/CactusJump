@@ -48,8 +48,8 @@ void Game::Draw() {
     default:
       {
         Serial.println("invalid game state");
-	// Restart the game if game state becomes invalid
-	m_state = kStart;
+        // Restart the game if game state becomes invalid
+        m_state = kStart;
         break;
       }
   }
@@ -116,7 +116,7 @@ void Game::GameOver(bool button_pressed) {
 void Game::UpdateObstaclePositions() {
   for (ssize_t i = 0; i < m_obstacles_length; i++) {
     m_obstacles[i].UpdateXPosition();
-  }   
+  }
 }
 
 bool Game::CollisionDetected() {
@@ -146,7 +146,7 @@ void Game::DrawPlayer() {
 }
 
 void Game::DrawObstacles() {
-  for (size_t i = 0; i < m_obstacles_length; i++) { 
+  for (size_t i = 0; i < m_obstacles_length; i++) {
     m_obstacles[i].Draw(m_renderer);
   }
 }
