@@ -5,3 +5,7 @@
 failed
 cpplint.py
 build
+.vscode
+
+# virtual environment
+venv
