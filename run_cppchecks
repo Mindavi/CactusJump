@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cppcheck --enable=warning src/main.cpp --force -I src lib --include=lib/* --error-exitcode=1 -q
+cpplint --quiet --recursive lib --recursive src
+

@@ -14,7 +14,9 @@ Game::Game(Asset bootup_screen,
     m_renderer(renderer) {}
 
 void Game::NextGameState() {
-  m_state = static_cast<GameState>((static_cast<int>(m_state) + 1) % (static_cast<int>(GameState::kGameOver) + 1));
+  int current_state_int = static_cast<int>(m_state);
+  int last_state_int = static_cast<int>(GameState::kGameOver);
+  m_state = static_cast<GameState>((current_state_int + 1) % (last_state_int + 1));
 }
 
 void Game::Draw() {
