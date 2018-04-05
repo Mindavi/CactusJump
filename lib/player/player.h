@@ -5,9 +5,6 @@
 #include "screen_info.h"
 #include "asset.h"
 
-// external libs
-#include <U8g2lib.h>
-
 // c lib
 #include <cinttypes>
 
