@@ -2,7 +2,7 @@
 #include "asset.h"
 #include <string>
 
-TEST(constructor_test, player_test) {
+TEST(asset_test, constructor_test) {
   uint16_t width = 2;
   uint16_t height = 4;
   unsigned char* bitmap = (unsigned char*)"abcdefgh";
