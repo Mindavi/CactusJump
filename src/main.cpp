@@ -11,7 +11,6 @@
 #include "player.xbm"
 #include "obstacle.xbm"
 
-#include "game_state.h"
 #include "asset.h"
 #include "player.h"
 #include "game.h"
@@ -26,18 +25,11 @@
 
 const uint8_t kButtonPin = D3;
 
-// Global game state
-GameState game_state = kStart;
-
 // Assets
 Asset bootup_screen(bootup_width, bootup_height, bootup_bits);
 Asset player_asset(player_width, player_height, player_bits);
 Asset logo_asset(bootup_width, bootup_height, bootup_bits);
 Asset obstacle_asset(obstacle_width, obstacle_height, obstacle_bits);
-
-// The player in the game
-// const int16_t kPlayerX = ((kScreenWidth / 3) - (player_asset.getWidth() / 2));
-// Player player(kPlayerX);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);

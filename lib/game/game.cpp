@@ -9,12 +9,12 @@ Game::Game(Asset bootup_screen,
     m_obstacles(obstacles),
     m_obstacles_length(obstacles_length),
     m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2), player_asset),
-    m_state(kStart),
+    m_state(GameState::kStart),
     m_distance_traveled(0),
     m_renderer(renderer) {}
 
 void Game::NextGameState() {
-  m_state = static_cast<GameState>((m_state + 1) % (kGameOver + 1));
+  m_state = static_cast<GameState>((static_cast<int>(m_state) + 1) % (static_cast<int>(GameState::kGameOver) + 1));
 }
 
 void Game::Draw() {
@@ -23,23 +23,23 @@ void Game::Draw() {
 
   // update graphics
   switch (m_state) {
-    case kStart:
+    case GameState::kStart:
       {
         DrawBootupScreen();
         break;
       }
-    case kHiscore:
+    case GameState::kHiscore:
       {
         DrawHiscoreScreen();
         break;
       }
-    case kPlay:
+    case GameState::kPlay:
       {
         DrawPlayer();
         DrawObstacles();
         break;
       }
-    case kGameOver:
+    case GameState::kGameOver:
       {
         DrawGameOver();
         DrawScore();
@@ -49,7 +49,7 @@ void Game::Draw() {
       {
         Serial.println("invalid game state");
         // Restart the game if game state becomes invalid
-        m_state = kStart;
+        m_state = GameState::kStart;
         break;
       }
   }
@@ -60,16 +60,16 @@ void Game::Draw() {
 
 void Game::Update(bool button_pressed) {
   switch (m_state) {
-    case kStart:
+    case GameState::kStart:
       Start(button_pressed);
       break;
-    case kHiscore:
+    case GameState::kHiscore:
       Hiscore(button_pressed);
       break;
-    case kPlay:
+    case GameState::kPlay:
       Play(button_pressed);
       break;
-    case kGameOver:
+    case GameState::kGameOver:
       GameOver(button_pressed);
       break;
     default:
