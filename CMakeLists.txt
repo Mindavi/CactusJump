@@ -16,12 +16,7 @@ set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
 
 # GTest
 include(${EXT_PROJECTS_DIR}/gtest/GoogleTest.cmake)
-
 include_directories(${GTEST_INCLUDE_DIRS} ${COMMON_INCLUDES})
-
-file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-add_executable(${PROJECT_NAME_STR} ${TEST_SRC_FILES})
-add_dependencies(${PROJECT_NAME_STR} gtest_external)
 
 # Build shared library and link it to test project
 add_subdirectory(lib)
@@ -32,7 +27,14 @@ set(TEST_LINK_LIBRARIES
   ${GTEST_MAIN_PATH}
   pthread)
 
-MESSAGE(STATUS "GTEST MAIN PATH: " ${GTEST_MAIN_PATH})
-MESSAGE(STATUS "CMAKE THEAD LIBS INIT: " ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries(${PROJECT_NAME_STR} ${GTEST_LIB_PATH} ${GTEST_MAIN_PATH} pthread CactusJump)
+# create a test binary per test source file
+enable_testing()
 
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+foreach(_test_file ${TEST_SRC_FILES})
+    get_filename_component(_test_name ${_test_file} NAME_WE)
+    add_executable(${_test_name} ${_test_file})
+    add_dependencies(${_test_name} gtest_external)
+    target_link_libraries(${_test_name} ${GTEST_LIB_PATH} ${GTEST_MAIN_PATH} pthread CactusJump)
+    add_test(${_test_name} ${_test_name})
+endforeach()
