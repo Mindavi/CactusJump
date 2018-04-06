@@ -30,7 +30,11 @@ set(TEST_LINK_LIBRARIES
 # create a test binary per test source file
 enable_testing()
 
-file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+set(TEST_DIR ${PROJECT_SOURCE_DIR}/test)
+set(TEST_SRC_FILES
+  ${TEST_DIR}/asset.cpp
+  ${TEST_DIR}/player.cpp)
+
 foreach(_test_file ${TEST_SRC_FILES})
     get_filename_component(_test_name ${_test_file} NAME_WE)
     add_executable(${_test_name} ${_test_file})
