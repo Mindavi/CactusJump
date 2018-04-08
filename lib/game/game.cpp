@@ -122,7 +122,11 @@ void Game::UpdateObstaclePositions() {
 }
 
 bool Game::CollisionDetected() {
-  // detect collisions
+  for (int i = 0; i < m_obstacles_length; i++) {
+    if (m_obstacles[i].CollidesWith(m_player)) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -151,10 +155,6 @@ void Game::DrawObstacles() {
   for (size_t i = 0; i < m_obstacles_length; i++) {
     m_obstacles[i].Draw(m_renderer);
   }
-}
-
-void Game::DrawGameOver() {
-  // maybe unneeded, DrawScore() is called when game over
 }
 
 void Game::DrawScore() {
