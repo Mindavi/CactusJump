@@ -23,6 +23,7 @@ class Player {
   template <typename TRenderer> void Draw(TRenderer *renderer) {
     m_asset.Draw(GetXPosition(), GetYPosition(), renderer);
   }
+
  private:
   int16_t m_y_position = 0;  // 0 is on the ground, negative is invalid
   int16_t m_x_position = 0;

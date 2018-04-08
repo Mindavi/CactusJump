@@ -27,7 +27,7 @@ bool Obstacle::CollidesWith(const Player& player) const {
   bool player_above_obstacle = bottom_player > top_obstacle;
 
   bool player_collides_x_obstacle = !player_before_obstacle && !player_after_obstacle;
-  
+
   if (player_collides_x_obstacle && !player_above_obstacle) {
     return true;
   }
