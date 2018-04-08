@@ -12,13 +12,23 @@ Obstacle::Obstacle(Asset obstacle_asset)
 {}
 
 bool Obstacle::CollidesWith(const Player& player) const {
-  int16_t left_player = player.GetXPosition() - (player.GetWidth() / 2.0f);
-  int16_t right_player = player.GetXPosition() + (player.GetWidth() / 2.0f);
+  int16_t left_player_x = player.GetXPosition();
+  int16_t right_player_x = player.GetXPosition() + player.GetWidth();
+  int16_t bottom_player = player.GetYPosition();
 
-  int16_t left_obstacle = m_x_position - (m_asset.GetWidth() / 2.0f);
-  int16_t right_obstacle = m_x_position + (m_asset.GetWidth() / 2.0f);
+  int16_t left_obstacle_x = m_x_position;
+  int16_t right_obstacle_x = m_x_position + m_asset.GetWidth();
+
+  // assume object y == 0
+  int16_t top_obstacle = m_asset.GetHeight();
+
+  bool player_before_obstacle = right_player_x < left_obstacle_x;
+  bool player_after_obstacle = left_player_x > right_obstacle_x;
+  bool player_above_obstacle = bottom_player > top_obstacle;
+
+  bool player_collides_x_obstacle = !player_before_obstacle && !player_after_obstacle;
   
-  if (right_player > left_obstacle && left_player < right_obstacle) {
+  if (player_collides_x_obstacle && !player_above_obstacle) {
     return true;
   }
   return false;
