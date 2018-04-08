@@ -43,7 +43,6 @@ void Game::Draw() {
       }
     case GameState::kGameOver:
       {
-        DrawGameOver();
         DrawScore();
         break;
       }
