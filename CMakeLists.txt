@@ -4,12 +4,19 @@ project(${PROJECT_NAME_STR} C CXX)
 
 find_package(Threads REQUIRED)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-Wall -ansi -Wno-deprecated -pthread -std=c++11 -pedantic)
 endif()
 
 # set common include folder for module
-set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/lib/asset ${PROJECT_SOURCE_DIR}/lib/obstacle ${PROJECT_SOURCE_DIR}/lib/player ${PROJECT_SOURCE_DIR}/lib/shared)
+set(COMMON_INCLUDES 
+  ${PROJECT_SOURCE_DIR}/lib/asset
+  ${PROJECT_SOURCE_DIR}/lib/obstacle
+  ${PROJECT_SOURCE_DIR}/lib/player
+  ${PROJECT_SOURCE_DIR}/lib/shared
+  )
 MESSAGE(STATUS "COMMON_INCLUDES: " ${COMMON_INCLUDES})
 
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
@@ -33,7 +40,9 @@ enable_testing()
 set(TEST_DIR ${PROJECT_SOURCE_DIR}/test)
 set(TEST_SRC_FILES
   ${TEST_DIR}/asset.cpp
-  ${TEST_DIR}/player.cpp)
+  ${TEST_DIR}/player.cpp
+  ${TEST_DIR}/collision.cpp
+  )
 
 foreach(_test_file ${TEST_SRC_FILES})
     get_filename_component(_test_name ${_test_file} NAME_WE)

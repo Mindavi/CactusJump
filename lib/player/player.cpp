@@ -36,3 +36,11 @@ int16_t Player::GetYPosition() const {
 int16_t Player::GetXPosition() const {
   return m_x_position;
 }
+
+int16_t Player::GetWidth() const {
+  return m_asset.GetWidth();
+}
+
+int16_t Player::GetHeight() const {
+  return m_asset.GetHeight();
+}

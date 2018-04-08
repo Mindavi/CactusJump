@@ -9,6 +9,7 @@
 class Obstacle {
  public:
   explicit Obstacle(Asset obstacle_asset);
+  Obstacle(Asset obstacle_asset, int16_t x_position);
   ~Obstacle() {}
   void Draw();
   void UpdateXPosition();

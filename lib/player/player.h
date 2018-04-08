@@ -18,6 +18,8 @@ class Player {
   bool OnGround();
   int16_t GetYPosition() const;
   int16_t GetXPosition() const;
+  int16_t GetWidth() const;
+  int16_t GetHeight() const;
   template <typename TRenderer> void Draw(TRenderer *renderer) {
     m_asset.Draw(GetXPosition(), GetYPosition(), renderer);
   }
