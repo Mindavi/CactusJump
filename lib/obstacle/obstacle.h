@@ -11,7 +11,6 @@ class Obstacle {
   explicit Obstacle(Asset obstacle_asset);
   Obstacle(Asset obstacle_asset, int16_t x_position);
   ~Obstacle() {}
-  void Draw();
   void UpdateXPosition();
   int16_t GetXPosition() const;
   template <typename TRenderer> void Draw(TRenderer *renderer) {
