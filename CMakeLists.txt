@@ -7,7 +7,7 @@ find_package(Threads REQUIRED)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-Wall -ansi -Wno-deprecated -pthread -std=c++11 -pedantic)
+  add_compile_options(-Wall -ansi -Wno-deprecated -pthread -std=c++11 -pedantic)
 endif()
 
 # set common include folder for module
