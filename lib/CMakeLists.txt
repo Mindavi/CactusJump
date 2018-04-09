@@ -10,4 +10,5 @@ set(CactusJump_Sources
 
 set(LIBRARY_NAME CactusJump)
 add_library(${LIBRARY_NAME} SHARED ${CactusJump_Sources})
+target_include_directories(${LIBRARY_NAME} PUBLIC ${COMMON_INCLUDES})
 
