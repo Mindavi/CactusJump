@@ -24,6 +24,8 @@ build:
   
 after_build:
   - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\lib\%CONFIGURATION%\*.dll
+  - echo %cd%
+  - dir
   
 artifacts:
   - path: tests.zip
