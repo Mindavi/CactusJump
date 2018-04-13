@@ -20,9 +20,9 @@ build:
   project: build\CactusJumpTests.sln
   parallel: true
   
-artifacts:
-  - path: 'build\$(configuration)\*.exe'
-    name: test executables
+after_build:
+  - 7z a tests.zip '%APPVEYOR_BUILD_FOLDER%\build\$(configuration)\*.exe' '%APPVEYOR_BUILD_FOLDER%\build\lib\$(configuration)\*.dll'
   
-  - path: 'build\lib\$(configuration)\*.dll'
-    name: libraries
+artifacts:
+  - path: tests.zip
+    name: tests
