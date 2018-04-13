@@ -39,5 +39,5 @@ test_script:
 
 artifacts:
   - path: tests.zip
-  - path: .pioenvs\%PIO_ENV%\firmware.elf
+  - path: '%APPVEYOR_BUILD_FOLDER%\.pioenvs\%PIO_ENV%\firmware.elf'
     name: '%PIO_ENV% firmware'
