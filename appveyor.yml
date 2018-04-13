@@ -22,7 +22,7 @@ build:
   
 artifacts:
   - path: 'build\*.exe'
-  - name: test executables
+    name: test executables
   
   - path: 'build\lib\*.dll'
-  - name: libraries
+    name: libraries
