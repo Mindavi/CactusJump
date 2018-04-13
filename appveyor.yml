@@ -6,15 +6,15 @@ clone_folder: c:\projects\cactusjump
 image: Visual Studio 2015
 
 configuration:
-- Debug
-- Release
+  - Debug
+  - Release
 
 cache:
   - build\googletest-source
   - build\googletest-download
 
 before_build:
-- cmd: mkdir -p build && cd build && cmake --version && cmake ..
+  - cmd: mkdir -p build && cd build && cmake --version && cmake ..
   
 build:
   project: build\CactusJumpTests.sln
