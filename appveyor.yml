@@ -10,11 +10,6 @@ configuration:
   - Debug
   - Release
 
-cache:
-  - build\googletest-src
-  - build\googletest-download
-  - build\googletest-build
-
 before_build:
   - if not exist build mkdir build
   - cd build
