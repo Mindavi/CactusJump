@@ -28,13 +28,11 @@ build:
 after_build:
   - copy build\lib\%CONFIGURATION%\*.dll build\%CONFIGURATION%
   - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.dll
-  - echo %cd%
-  - dir
 
 test_script:
-  - build\asset.exe
-  - build\collision.exe
-  - build\player.exe
+  - build\%CONFIGURATION%\asset.exe
+  - build\%CONFIGURATION%\collision.exe
+  - build\%CONFIGURATION%\player.exe
   - platformio run -S
 
 artifacts:
