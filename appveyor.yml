@@ -28,6 +28,11 @@ after_build:
   - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.dll
   - echo %cd%
   - dir
-  
+
+test_script:
+  - asset.exe
+  - collision.exe
+  - player.exe
+
 artifacts:
   - path: tests.zip
