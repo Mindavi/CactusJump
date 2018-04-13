@@ -21,7 +21,7 @@ build:
   parallel: true
   
 after_build:
-  - 7z a tests.zip '.\build\$(configuration)\*.exe' '.\build\lib\$(configuration)\*.dll'
+  - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\$(configuration)\*.exe %APPVEYOR_BUILD_FOLDER%\build\lib\$(configuration)\*.dll
   
 artifacts:
   - path: tests.zip
