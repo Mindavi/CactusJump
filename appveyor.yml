@@ -10,12 +10,12 @@ configuration:
 - Debug
 
 cache:
-  - build/googletest-source
-  - build/googletest-download
+  - build\googletest-source
+  - build\googletest-download
 
 before_build:
 - cmd: mkdir build && cd build && cmake --version && cmake ..
   
 build:
-  project: c:\projects\cactusjump\build\CactusJumpTests.sln
+  project: build\CactusJumpTests.sln
   parallel: true
