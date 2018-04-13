@@ -1,7 +1,5 @@
 version: '{build}'
 
-clone_folder: c:\projects\cactusjump
-
 # Build worker image (VM template)
 image: Visual Studio 2015
 
