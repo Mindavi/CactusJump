@@ -11,8 +11,9 @@ configuration:
   - Release
 
 environment:
+  solution_name: build\CactusJumpTests.sln
   PIO_ENV: d1_mini
-  
+
 install:
   - pip install -U platformio --quiet
 
@@ -23,12 +24,8 @@ before_build:
   - cmake ..
   - cd %APPVEYOR_BUILD_FOLDER%
   
-build:
-  project: build\CactusJumpTests.sln
-  parallel: true
-  verbosity: minimal
-
 build_script:
+  - msbuild %solution_name% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m /verbosity:minimal
   - platformio run -s --environment %PIO_ENV%
   
 after_build:
