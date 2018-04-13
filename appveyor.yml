@@ -33,7 +33,7 @@ test_script:
   - build\%CONFIGURATION%\asset.exe
   - build\%CONFIGURATION%\collision.exe
   - build\%CONFIGURATION%\player.exe
-  - platformio run -S
+  - platformio run -s
 
 artifacts:
   - path: tests.zip
