@@ -32,7 +32,7 @@ build_script:
   - platformio run -s --environment %PIO_ENV%
   
 after_build:
-  - copy 'build\lib\%CONFIGURATION%\*.dll' build\%CONFIGURATION%
+  - xcopy %APPVEYOR_BUILD_FOLDER%\build\lib\%CONFIGURATION%\*.dll %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\
   - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.dll
 
 test_script:
