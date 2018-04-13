@@ -13,7 +13,8 @@ platform:
 - x64
 
 cache:
-  - build/googletest-*
+  - build/googletest-source
+  - build/googletest-download
   
 environment:
   matrix:
