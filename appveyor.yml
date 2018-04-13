@@ -10,7 +10,7 @@ configuration:
 - Debug
 
 platform:
-- x64
+- x86
 
 cache:
   - build/googletest-source
@@ -18,7 +18,7 @@ cache:
   
 environment:
   matrix:
-  - arch: Win64
+  - arch: Win32
 
 before_build:
 - cmd: mkdir build && cd build && cmake --version && cmake ..
