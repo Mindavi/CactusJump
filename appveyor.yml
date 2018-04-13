@@ -1,6 +1,6 @@
 version: '{build}'
 
-clone_folder: c:\projects\CactusJump
+clone_folder: c:\projects\cactusjump
 
 # Build worker image (VM template)
 image: Visual Studio 2015
@@ -23,5 +23,5 @@ before_build:
 - cmd: mkdir build && cd build && cmake --version && cmake ..
   
 build:
-  project: c:\projects\CactusJump\build\CactusJumpTests.sln
+  project: c:\projects\cactusjump\build\CactusJumpTests.sln
   parallel: true
