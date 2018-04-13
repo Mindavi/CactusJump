@@ -12,7 +12,7 @@ configuration:
   - Release
 
 cache:
-  - build\googletest-source
+  - build\googletest-src
   - build\googletest-download
 
 before_build:
@@ -23,8 +23,8 @@ build:
   parallel: true
   
 artifacts:
-  - path: 'build\*.exe'
+  - path: '**\*.exe'
     name: test executables
   
-  - path: 'build\lib\*.dll'
+  - path: '**\lib\*.dll'
     name: libraries
