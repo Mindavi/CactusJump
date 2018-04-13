@@ -15,6 +15,7 @@ before_build:
   - cd build
   - cmake --version
   - cmake ..
+  - cd %APPVEYOR_BUILD_FOLDER%
   
 build:
   project: build\CactusJumpTests.sln
@@ -23,7 +24,8 @@ build:
   verbosity: minimal
   
 after_build:
-  - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\lib\%CONFIGURATION%\*.dll
+  - copy build\lib\%CONFIGURATION%\*.dll build\%CONFIGURATION%
+  - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.dll
   - echo %cd%
   - dir
   
