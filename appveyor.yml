@@ -43,4 +43,4 @@ test_script:
 artifacts:
   - path: tests.zip
   - path: .pioenvs\%PIO_ENV%\firmware.elf
-    name: %PIO_ENV% firmware
+    name: '%PIO_ENV% firmware'
