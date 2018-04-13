@@ -9,9 +9,12 @@ platform:
 configuration:
   - Debug
   - Release
+
+environment:
+  PIO_ENV: d1_mini
   
 install:
-  - pip install -U platformio
+  - pip install -U platformio --quiet
 
 before_build:
   - if not exist build mkdir build
@@ -24,6 +27,9 @@ build:
   project: build\CactusJumpTests.sln
   parallel: true
   verbosity: minimal
+
+build_script:
+  - platformio run -s --environment %PIO_ENV%
   
 after_build:
   - copy build\lib\%CONFIGURATION%\*.dll build\%CONFIGURATION%
@@ -33,7 +39,8 @@ test_script:
   - build\%CONFIGURATION%\asset.exe
   - build\%CONFIGURATION%\collision.exe
   - build\%CONFIGURATION%\player.exe
-  - platformio run -s
 
 artifacts:
   - path: tests.zip
+  - path: .pioenvs\%PIO_ENV%\firmware.elf
+    name: %PIO_ENV% firmware
