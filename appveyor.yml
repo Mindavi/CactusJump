@@ -9,16 +9,9 @@ configuration:
 - Release
 - Debug
 
-platform:
-- x86
-
 cache:
   - build/googletest-source
   - build/googletest-download
-  
-environment:
-  matrix:
-  - arch: Win32
 
 before_build:
 - cmd: mkdir build && cd build && cmake --version && cmake ..
