@@ -14,7 +14,7 @@ cache:
   - build\googletest-download
 
 before_build:
-- cmd: mkdir build && cd build && cmake --version && cmake ..
+- cmd: mkdir -p build && cd build && cmake --version && cmake ..
   
 build:
   project: build\CactusJumpTests.sln
