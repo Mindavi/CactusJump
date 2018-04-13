@@ -9,6 +9,9 @@ platform:
 configuration:
   - Debug
   - Release
+  
+install:
+  - pip install -U platformio
 
 before_build:
   - if not exist build mkdir build
@@ -20,7 +23,6 @@ before_build:
 build:
   project: build\CactusJumpTests.sln
   parallel: true
-  
   verbosity: minimal
   
 after_build:
@@ -30,9 +32,10 @@ after_build:
   - dir
 
 test_script:
-  - asset.exe
-  - collision.exe
-  - player.exe
+  - build\asset.exe
+  - build\collision.exe
+  - build\player.exe
+  - platformio run -S
 
 artifacts:
   - path: tests.zip
