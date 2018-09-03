@@ -11,7 +11,7 @@ TEST(collision_test, collides_with_player) {
     Asset asset(asset_width, asset_height, nullptr);
     Player player(x_position_player, asset);
     Obstacle obstacle(asset, x_position_obstacle);
-    
+
     ASSERT_TRUE(obstacle.CollidesWith(player));
 }
 
@@ -23,7 +23,7 @@ TEST(collision_test, doesnt_collide_with_player) {
     Asset asset(asset_width, asset_height, nullptr);
     Player player(x_position_player, asset);
     Obstacle obstacle(asset, x_position_obstacle);
-    
+
     ASSERT_FALSE(obstacle.CollidesWith(player));
 }
 
@@ -46,7 +46,7 @@ TEST(collision_test, player_jumps_over_object) {
     // assumption: the player velocity is 9, which is defined in the player.h file
     ASSERT_NE(0, player.GetYPosition());
     obstacle.UpdateXPosition();
-    
+
     ASSERT_FALSE(obstacle.CollidesWith(player));
 }
 

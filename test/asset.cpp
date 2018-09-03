@@ -9,5 +9,5 @@ TEST(asset_test, constructor_test) {
   Asset asset(width, height, bitmap);
   ASSERT_EQ(asset.GetWidth(), width);
   ASSERT_EQ(asset.GetHeight(), height);
-  ASSERT_TRUE(strcmp((const char*)asset.GetBitmap(), (const char*)bitmap) == 0);
+  ASSERT_EQ(strcmp((const char*)asset.GetBitmap(), (const char*)bitmap), 0);
 }
