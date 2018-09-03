@@ -14,9 +14,28 @@ Game::Game(Asset bootup_screen,
     m_renderer(renderer) {}
 
 void Game::NextGameState() {
-  int current_state_int = static_cast<int>(m_state);
-  int last_state_int = static_cast<int>(GameState::kGameOver);
-  m_state = static_cast<GameState>((current_state_int + 1) % (last_state_int + 1));
+  switch (m_state) {
+    case GameState::kStart:
+      {
+        m_state = GameState::kHiscore;
+        break;
+      }
+    case GameState::kHiscore:
+      {
+        m_state = GameState::kPlay;
+        break;
+      }
+    case GameState::kPlay:
+      {
+        m_state = GameState::kStart;
+        break;
+      }
+    default:
+      {
+        m_state = GameState::kStart;
+        break;
+      }
+  }
 }
 
 void Game::Draw() {
