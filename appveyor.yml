@@ -1,0 +1,43 @@
+version: '{build}'
+
+# Build worker image (VM template)
+image: Visual Studio 2015
+
+platform:
+  - Win32
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  solution_name: build\CactusJumpTests.sln
+  PIO_ENV: d1_mini
+
+install:
+  - pip install -U platformio --quiet
+
+before_build:
+  - if not exist build mkdir build
+  - cd build
+  - cmake --version
+  - cmake ..
+  - cd %APPVEYOR_BUILD_FOLDER%
+  
+build_script:
+  - msbuild %solution_name% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m /verbosity:minimal
+  - platformio run -s --environment %PIO_ENV%
+  
+after_build:
+  - xcopy %APPVEYOR_BUILD_FOLDER%\build\lib\%CONFIGURATION%\*.dll %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\
+  - 7z a tests.zip %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.exe %APPVEYOR_BUILD_FOLDER%\build\%CONFIGURATION%\*.dll
+
+test_script:
+  - build\%CONFIGURATION%\asset.exe
+  - build\%CONFIGURATION%\collision.exe
+  - build\%CONFIGURATION%\player.exe
+
+artifacts:
+  - path: tests.zip
+  - path: .pioenvs\%PIO_ENV%\firmware.elf
+    name: '%PIO_ENV% firmware'
