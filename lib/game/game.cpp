@@ -113,9 +113,7 @@ void Game::Hiscore(bool button_pressed) {
 
 void Game::Play(bool button_pressed) {
   if (button_pressed) {
-    if (m_player.OnGround()) {
-      m_player.Jump();
-    }
+    m_player.Jump();
   }
 
   UpdateObstacle();
