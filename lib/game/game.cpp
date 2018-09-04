@@ -8,6 +8,7 @@ Game::Game(Asset bootup_screen,
   : m_bootup_screen(bootup_screen),
     m_obstacles(obstacles),
     m_obstacles_length(obstacles_length),
+    m_current_obstacle(nullptr),
     m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2), player_asset),
     m_state(GameState::kStart),
     m_distance_traveled(0),
@@ -57,7 +58,7 @@ void Game::Draw() {
     case GameState::kPlay:
       {
         DrawPlayer();
-        DrawObstacles();
+        DrawObstacle();
         break;
       }
     case GameState::kGameOver:
@@ -117,8 +118,9 @@ void Game::Play(bool button_pressed) {
     }
   }
 
+  UpdateObstacle();
+
   m_player.UpdateYPosition();
-  UpdateObstaclePositions();
 
   if (CollisionDetected()) {
     NextGameState();
@@ -133,19 +135,31 @@ void Game::GameOver(bool button_pressed) {
   }
 }
 
-void Game::UpdateObstaclePositions() {
-  for (ssize_t i = 0; i < m_obstacles_length; i++) {
-    m_obstacles[i].UpdateXPosition();
+void Game::DrawObstacle() {
+  if (m_current_obstacle != nullptr) {
+      m_current_obstacle->Draw(m_renderer);
   }
 }
 
-bool Game::CollisionDetected() {
-  for (int i = 0; i < m_obstacles_length; i++) {
-    if (m_obstacles[i].CollidesWith(m_player)) {
-      return true;
-    }
+void Game::UpdateObstacle() {
+  if (m_obstacles_length <= 0) {
+    return;
   }
-  return false;
+  if (m_current_obstacle == nullptr) {
+    // TODO: choose random obstacle
+    m_current_obstacle = &m_obstacles[0];
+  }
+  auto off_screen = 0 - m_current_obstacle->GetWidth();
+  if (m_current_obstacle->GetXPosition() <= off_screen) {
+    m_current_obstacle->Reset();
+    m_current_obstacle = nullptr;
+    return;
+  }
+  m_current_obstacle->UpdateXPosition();
+}
+
+bool Game::CollisionDetected() {
+  return m_current_obstacle->CollidesWith(m_player);
 }
 
 uint32_t Game::GetScore() {
@@ -167,12 +181,6 @@ void Game::DrawHiscoreScreen() {
 
 void Game::DrawPlayer() {
   m_player.Draw(m_renderer);
-}
-
-void Game::DrawObstacles() {
-  for (size_t i = 0; i < m_obstacles_length; i++) {
-    m_obstacles[i].Draw(m_renderer);
-  }
 }
 
 void Game::DrawScore() {

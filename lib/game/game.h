@@ -24,6 +24,7 @@ class Game {
   Asset m_bootup_screen;
   Obstacle* m_obstacles;
   uint8_t m_obstacles_length;
+  Obstacle* m_current_obstacle;
   Player m_player;
   GameState m_state;
   uint32_t m_distance_traveled;  // represents score
@@ -34,12 +35,12 @@ class Game {
   void Play(bool button_pressed);
   void GameOver(bool button_pressed);
   void NextGameState();
-  void UpdateObstaclePositions();
+  void UpdateObstacle();
   bool CollisionDetected();
   void DrawBootupScreen();
   void DrawHiscoreScreen();
   void DrawPlayer();
-  void DrawObstacles();
+  void DrawObstacle();
   void DrawGameOver();
   void DrawScore();
 };

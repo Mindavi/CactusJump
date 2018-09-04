@@ -42,3 +42,10 @@ int16_t Obstacle::GetXPosition() const {
   return m_x_position;
 }
 
+uint16_t Obstacle::GetWidth() const {
+  return m_asset.GetWidth();
+}
+
+void Obstacle::Reset() {
+  m_x_position = kScreenWidth + m_asset.GetWidth();
+}

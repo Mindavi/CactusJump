@@ -6,6 +6,7 @@ Player::Player(int16_t x_position, Asset asset)
 {}
 
 void Player::Jump() {
+  // TODO: we could do the on ground check here
   m_y_velocity = kJumpVelocity;
 }
 

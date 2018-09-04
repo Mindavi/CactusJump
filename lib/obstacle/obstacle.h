@@ -17,6 +17,8 @@ class Obstacle {
     m_asset.Draw(GetXPosition(), 0, renderer);
   }
   bool CollidesWith(const Player& player) const;
+  uint16_t GetWidth() const;
+  void Reset();
  private:
   Asset m_asset;
   int16_t m_x_position = 0;
