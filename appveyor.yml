@@ -41,3 +41,5 @@ artifacts:
   - path: tests.zip
   - path: .pioenvs\%PIO_ENV%\firmware.elf
     name: '%PIO_ENV% firmware'
+  - path: .pioenvs\%PIO_ENV%\firmware.bin
+    name: '%PIO_ENV% firmware (for direct upload)'
