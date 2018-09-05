@@ -64,7 +64,6 @@ bool buttonPressed = false;
 void loop(void) {
   if (button.update()) {
     buttonPressed = button.read();
-    Serial.println("Button update");
   } else {
     buttonPressed = false;
   }
