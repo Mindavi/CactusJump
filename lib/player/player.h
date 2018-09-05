@@ -15,7 +15,6 @@ class Player {
   ~Player() {}
   void Jump();
   void UpdateYPosition();
-  bool OnGround();
   int16_t GetYPosition() const;
   int16_t GetXPosition() const;
   int16_t GetWidth() const;
@@ -32,6 +31,8 @@ class Player {
   // for the jumping algorithm
   static const uint8_t kGravity = 1;
   static const uint8_t kJumpVelocity = 9;
+
+  bool OnGround();
 
   // asset
   Asset m_asset;

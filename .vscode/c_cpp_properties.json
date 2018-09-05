@@ -41,7 +41,8 @@
                 "${workspaceFolder}/.piolibdeps/Bounce2_ID1106",
                 "${workspaceFolder}/.piolibdeps/U8g2_ID942/src",
                 "${workspaceFolder}/lib/assets",
-                "${workspaceFolder}/lib/obstacle"
+                "${workspaceFolder}/lib/obstacle",
+                "${workspaceFolder}/lib/state"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -60,7 +61,8 @@
             },
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         },
         {
             "name": "Win32",
@@ -84,5 +86,5 @@
             }
         }
     ],
-    "version": 3
+    "version": 4
 }

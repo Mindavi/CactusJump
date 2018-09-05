@@ -17,10 +17,12 @@ class Obstacle {
     m_asset.Draw(GetXPosition(), 0, renderer);
   }
   bool CollidesWith(const Player& player) const;
+  uint16_t GetWidth() const;
+  void Reset();
  private:
   Asset m_asset;
   int16_t m_x_position = 0;
-  int16_t m_x_velocity = -1;  // backwards on x-axis, so towards player
+  int16_t m_x_velocity = -2;  // backwards on x-axis, so towards player
 };
 
 #endif  // LIB_OBSTACLE_OBSTACLE_H__
