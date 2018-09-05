@@ -26,9 +26,8 @@
 const uint8_t kButtonPin = D3;
 
 // Assets
-Asset bootup_screen(bootup_width, bootup_height, bootup_bits);
+Asset bootup_screen(logo_width, logo_height, logo_bits);
 Asset player_asset(player_width, player_height, player_bits);
-Asset logo_asset(bootup_width, bootup_height, bootup_bits);
 Asset obstacle_asset(obstacle_width, obstacle_height, obstacle_bits);
 
 // The display object
