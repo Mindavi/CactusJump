@@ -28,6 +28,11 @@ void Game::NextGameState() {
       }
     case GameState::kPlay:
       {
+        m_state = GameState::kGameOver;
+        break;
+      }
+    case GameState::kGameOver:
+      {
         m_state = GameState::kStart;
         break;
       }
@@ -101,6 +106,7 @@ void Game::Update(bool button_pressed) {
 void Game::Start(bool button_pressed) {
   if (button_pressed) {
     m_distance_traveled = 0;
+    m_current_obstacle = nullptr;
     NextGameState();
   }
 }
@@ -146,6 +152,7 @@ void Game::UpdateObstacle() {
   if (m_current_obstacle == nullptr) {
     // TODO: choose random obstacle
     m_current_obstacle = &m_obstacles[0];
+    m_current_obstacle->Reset();
   }
   auto off_screen = 0 - m_current_obstacle->GetWidth();
   if (m_current_obstacle->GetXPosition() <= off_screen) {
@@ -157,6 +164,9 @@ void Game::UpdateObstacle() {
 }
 
 bool Game::CollisionDetected() {
+  if (m_current_obstacle == nullptr) {
+    return false;
+  }
   return m_current_obstacle->CollidesWith(m_player);
 }
 
