@@ -10,6 +10,7 @@
 #include "logo.xbm"
 #include "player.xbm"
 #include "obstacle.xbm"
+#include "coffee.xbm"
 
 #include "asset.h"
 #include "player.h"
@@ -29,13 +30,14 @@ const uint8_t kButtonPin = D3;
 Asset bootup_screen(logo_width, logo_height, logo_bits);
 Asset player_asset(player_width, player_height, player_bits);
 Asset obstacle_asset(obstacle_width, obstacle_height, obstacle_bits);
+Asset coffee_asset(coffee_width, coffee_height, coffee_bits);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 Bounce button;
 
-Obstacle obstacles[] = {Obstacle(obstacle_asset)};
+Obstacle obstacles[] = {Obstacle(coffee_asset), Obstacle(obstacle_asset)};
 const size_t obstacles_size = sizeof(obstacles) / sizeof(obstacles[0]);
 Game game(bootup_screen, player_asset, obstacles, obstacles_size, &u8g2);
 
