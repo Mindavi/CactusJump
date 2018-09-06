@@ -12,6 +12,7 @@
 // obstacles
 #include "coffee.xbm"
 #include "bottle.xbm"
+#include "mushroom.xbm"
 
 #include "asset.h"
 #include "player.h"
@@ -33,6 +34,7 @@ Asset player_asset(player_width, player_height, player_bits);
 // obstacles
 Asset coffee_asset(coffee_width, coffee_height, coffee_bits);
 Asset bottle_asset(bottle_width, bottle_height, bottle_bits);
+Asset mushroom_asset(mushroom_width, mushroom_height, mushroom_bits);
 
 // The display object
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
@@ -42,6 +44,7 @@ Bounce button;
 Obstacle obstacles[] = {
   Obstacle(coffee_asset),
   Obstacle(bottle_asset),
+  Obstacle(mushroom_asset),
 };
 const size_t obstacles_size = sizeof(obstacles) / sizeof(obstacles[0]);
 Game game(bootup_screen, player_asset, obstacles, obstacles_size, &u8g2);
