@@ -150,8 +150,8 @@ void Game::UpdateObstacle() {
     return;
   }
   if (m_current_obstacle == nullptr) {
-    // TODO: choose random obstacle
-    m_current_obstacle = &m_obstacles[0];
+    uint16_t random_index = random(0, m_obstacles_length);
+    m_current_obstacle = &m_obstacles[random_index];
     m_current_obstacle->Reset();
   }
   auto off_screen = 0 - m_current_obstacle->GetWidth();
