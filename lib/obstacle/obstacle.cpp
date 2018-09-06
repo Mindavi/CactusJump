@@ -2,6 +2,11 @@
 #include "screen_info.h"
 #include <math.h>
 
+Obstacle::Obstacle(Asset obstacle_asset, float x_position)
+  : m_asset(obstacle_asset),
+    m_x_position(x_position)
+{}
+
 Obstacle::Obstacle(Asset obstacle_asset)
   : m_asset(obstacle_asset),
     m_x_position(kScreenWidth + obstacle_asset.GetWidth())  // right of screen

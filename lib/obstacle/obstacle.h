@@ -9,6 +9,7 @@
 class Obstacle {
  public:
   explicit Obstacle(Asset obstacle_asset);
+  Obstacle(Asset obstacle_asset, float x_position);
   ~Obstacle() {}
   void UpdateXPosition();
   int16_t GetXPosition() const;
