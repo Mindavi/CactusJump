@@ -28,6 +28,7 @@ class Game {
   Player m_player;
   GameState m_state;
   uint32_t m_distance_traveled;  // represents score
+  std::array<uint32_t, 5> m_high_scores;
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* m_renderer;
   static const uint8_t kScorePerTick = 1;
   void Start(bool button_pressed);
@@ -36,6 +37,7 @@ class Game {
   void GameOver(bool button_pressed);
   void NextGameState();
   void UpdateObstacle();
+  bool AddHighScore(uint32_t new_high_score);
   bool CollisionDetected();
   void DrawBootupScreen();
   void DrawHiscoreScreen();
