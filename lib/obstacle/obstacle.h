@@ -22,7 +22,7 @@ class Obstacle {
  private:
   Asset m_asset;
   int16_t m_x_position = 0;
-  int16_t m_x_velocity = -2;  // backwards on x-axis, so towards player
+  uint16_t m_x_velocity = 2;
 };
 
 #endif  // LIB_OBSTACLE_OBSTACLE_H__

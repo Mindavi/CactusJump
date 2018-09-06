@@ -35,7 +35,7 @@ bool Obstacle::CollidesWith(const Player& player) const {
 }
 
 void Obstacle::UpdateXPosition() {
-  m_x_position += m_x_velocity;
+  m_x_position -= m_x_velocity;
 }
 
 int16_t Obstacle::GetXPosition() const {
