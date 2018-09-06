@@ -35,7 +35,7 @@ bool Obstacle::CollidesWith(const Player& player) const {
 }
 
 void Obstacle::UpdateXPosition() {
-  m_x_position += m_x_velocity;
+  m_x_position -= m_x_velocity;
 }
 
 int16_t Obstacle::GetXPosition() const {
@@ -48,4 +48,8 @@ uint16_t Obstacle::GetWidth() const {
 
 void Obstacle::Reset() {
   m_x_position = kScreenWidth + m_asset.GetWidth();
+}
+
+void Obstacle::SetVelocity(uint16_t velocity) {
+  m_x_velocity = velocity;
 }
