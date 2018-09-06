@@ -169,6 +169,10 @@ void Game::UpdateObstacle() {
     uint16_t random_index = random(0, m_obstacles_length);
     m_current_obstacle = &m_obstacles[random_index];
     m_current_obstacle->Reset();
+    const auto base_velocity = 2.0;
+    const auto increment = 0.1;
+    auto new_velocity = (GetScore() / 100.) * increment + base_velocity;
+    m_current_obstacle->SetVelocity(new_velocity);
   }
   auto off_screen = 0 - m_current_obstacle->GetWidth();
   if (m_current_obstacle->GetXPosition() <= off_screen) {

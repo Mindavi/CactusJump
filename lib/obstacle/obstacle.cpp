@@ -1,10 +1,6 @@
 #include "obstacle.h"
 #include "screen_info.h"
-
-Obstacle::Obstacle(Asset obstacle_asset, int16_t x_position)
-  : m_asset(obstacle_asset),
-    m_x_position(x_position)
-{}
+#include <math.h>
 
 Obstacle::Obstacle(Asset obstacle_asset)
   : m_asset(obstacle_asset),
@@ -39,7 +35,7 @@ void Obstacle::UpdateXPosition() {
 }
 
 int16_t Obstacle::GetXPosition() const {
-  return m_x_position;
+  return floor(m_x_position);
 }
 
 uint16_t Obstacle::GetWidth() const {
@@ -48,4 +44,8 @@ uint16_t Obstacle::GetWidth() const {
 
 void Obstacle::Reset() {
   m_x_position = kScreenWidth + m_asset.GetWidth();
+}
+
+void Obstacle::SetVelocity(float velocity) {
+  m_x_velocity = velocity;
 }

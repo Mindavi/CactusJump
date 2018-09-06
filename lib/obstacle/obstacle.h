@@ -9,7 +9,6 @@
 class Obstacle {
  public:
   explicit Obstacle(Asset obstacle_asset);
-  Obstacle(Asset obstacle_asset, int16_t x_position);
   ~Obstacle() {}
   void UpdateXPosition();
   int16_t GetXPosition() const;
@@ -19,10 +18,11 @@ class Obstacle {
   bool CollidesWith(const Player& player) const;
   uint16_t GetWidth() const;
   void Reset();
+  void SetVelocity(float velocity);
  private:
   Asset m_asset;
-  int16_t m_x_position = 0;
-  uint16_t m_x_velocity = 2;
+  float m_x_position = 0.0;
+  float m_x_velocity = 2.0;
 };
 
 #endif  // LIB_OBSTACLE_OBSTACLE_H__
