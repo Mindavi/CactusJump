@@ -5,6 +5,7 @@ Game::Game(Asset bootup_screen,
   Asset player_asset,
   Obstacle* obstacles,
   uint8_t obstacles_length,
+  ScoreKeeperDefault *scorekeeper,
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer)
   : m_bootup_screen(bootup_screen),
     m_obstacles(obstacles),
@@ -13,9 +14,8 @@ Game::Game(Asset bootup_screen,
     m_player((kScreenWidth / 3) - (player_asset.GetWidth() / 2), player_asset),
     m_state(GameState::kStart),
     m_distance_traveled(0),
-    m_renderer(renderer) {
-      m_high_scores.fill(0);
-    }
+    m_scorekeeper(scorekeeper),
+    m_renderer(renderer) {}
 
 void Game::NextGameState() {
   switch (m_state) {
@@ -130,23 +130,11 @@ void Game::Play(bool button_pressed) {
   m_player.UpdateYPosition();
 
   if (CollisionDetected()) {
-    AddHighScore(GetScore());
+    m_scorekeeper->TryInsert(GetScore());
     NextGameState();
     return;
   }
   m_distance_traveled += 1;
-}
-
-bool Game::AddHighScore(uint32_t new_high_score) {
-  for (auto& high_score : m_high_scores) {
-    if (new_high_score > high_score) {
-      auto old_score = high_score;
-      high_score = new_high_score;
-      AddHighScore(old_score);
-      return true;
-    }
-  }
-  return false;
 }
 
 void Game::GameOver(bool button_pressed) {
@@ -207,7 +195,7 @@ void Game::DrawHiscoreScreen() {
   // TODO: draw hi scores
   static const uint8_t step = 8;
   uint8_t y_offset = step;
-  for (const auto& score : m_high_scores) {
+  for (const auto& score : m_scorekeeper->Scores()) {
     char score_string[20];
     int written = snprintf(score_string, sizeof(score_string), "%u", score);
     if (written <= 0 || written >= static_cast<int>(sizeof(score_string))) {

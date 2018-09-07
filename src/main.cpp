@@ -1,7 +1,6 @@
 // Copyright 2017 Rick van Schijndel
 
 #include <Arduino.h>
-#include <stdio.h>
 
 #include <Bounce2.h>
 #include <U8g2lib.h>
@@ -17,6 +16,8 @@
 #include "asset.h"
 #include "player.h"
 #include "game.h"
+#include "scorekeeper.h"
+#include "FS.h"
 #include "screen_info.h"
 
 #ifdef U8X8_HAVE_HW_SPI
@@ -47,15 +48,17 @@ Obstacle obstacles[] = {
   Obstacle(mushroom_asset),
 };
 const size_t obstacles_size = sizeof(obstacles) / sizeof(obstacles[0]);
-Game game(bootup_screen, player_asset, obstacles, obstacles_size, &u8g2);
+ScoreKeeperDefault scorekeeper;
 
-void setupButton() {
+Game game(bootup_screen, player_asset, obstacles, obstacles_size, &scorekeeper, &u8g2);
+
+void setupButton(void) {
   pinMode(kButtonPin, INPUT_PULLUP);
   button.attach(kButtonPin);
   button.interval(10);
 }
 
-void setupGraphics() {
+void setupGraphics(void) {
   u8g2.begin();
   u8g2.setFlipMode(0);
   u8g2.setFont(u8g2_font_artossans8_8r);
@@ -66,6 +69,7 @@ void setup(void) {
   setupButton();
   Serial.begin(115200);
   randomSeed(analogRead(0));
+  SPIFFS.begin();
   delay(1000);
 }
 

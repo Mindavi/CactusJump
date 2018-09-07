@@ -5,6 +5,7 @@
 #include "asset.h"
 #include "obstacle.h"
 #include "game_state.h"
+#include "scorekeeper.h"
 #include "screen_info.h"
 #include <U8g2lib.h>
 
@@ -14,6 +15,7 @@ class Game {
     Asset player_asset,
     Obstacle* obstacles,
     uint8_t obstacles_length,
+    ScoreKeeperDefault *scorekeeper,
     U8G2_SSD1306_128X64_NONAME_F_HW_I2C* renderer);
   ~Game() {}
   void Draw();
@@ -28,7 +30,7 @@ class Game {
   Player m_player;
   GameState m_state;
   uint32_t m_distance_traveled;  // represents score
-  std::array<uint32_t, 5> m_high_scores;
+  ScoreKeeperDefault *m_scorekeeper;
   U8G2_SSD1306_128X64_NONAME_F_HW_I2C* m_renderer;
   static const uint8_t kScorePerTick = 1;
   void Start(bool button_pressed);
@@ -37,7 +39,6 @@ class Game {
   void GameOver(bool button_pressed);
   void NextGameState();
   void UpdateObstacle();
-  bool AddHighScore(uint32_t new_high_score);
   bool CollisionDetected();
   void DrawBootupScreen();
   void DrawHiscoreScreen();
