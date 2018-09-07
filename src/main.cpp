@@ -70,6 +70,7 @@ void setup(void) {
   Serial.begin(115200);
   randomSeed(analogRead(0));
   SPIFFS.begin();
+  // SPIFFS.format();  // make sure the spiffs gets formatted the first time
   delay(1000);
 }
 
