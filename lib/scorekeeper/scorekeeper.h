@@ -9,6 +9,7 @@ template<int N>
 class ScoreKeeper {
  public:
     std::array<uint32_t, N> Scores() {
+        Load();
         return m_high_scores;
     }
     // Returns true when the high score is placed somewhere in the list of high scores,
@@ -21,6 +22,7 @@ class ScoreKeeper {
     }
 
  private:
+    const char *filename = "highscores.txt";
     bool Insertion(uint32_t new_score) {
         for (auto& score : m_high_scores) {
             if (new_score > score) {
@@ -34,7 +36,7 @@ class ScoreKeeper {
     }
     std::array<uint32_t, N> m_high_scores;
     void Store() {
-        File score_file = SPIFFS.open("highscores.txt", "w");
+        File score_file = SPIFFS.open(filename, "w");
         if (!score_file) {
             return;
         }
@@ -44,7 +46,7 @@ class ScoreKeeper {
         score_file.close();
     }
     void Load() {
-        File score_file = SPIFFS.open("highscores.txt", "r");
+        File score_file = SPIFFS.open(filename, "r");
         if (!score_file) {
             return;
         }
