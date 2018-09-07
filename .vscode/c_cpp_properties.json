@@ -11,8 +11,6 @@
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
-                    "/usr/include",
-                    "/usr/local/include",
                     "${workspaceFolder}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
@@ -31,9 +29,7 @@
                 "/usr/include/x86_64-linux-gnu/c++/7",
                 "/usr/include/c++/7/backward",
                 "/usr/lib/llvm-6.0/lib/clang/6.0.0/include",
-                "/usr/local/include",
                 "/usr/include/x86_64-linux-gnu",
-                "/usr/include",
                 "${workspaceFolder}/lib/shared",
                 "${workspaceFolder}/lib/asset",
                 "${workspaceFolder}/lib/player",
@@ -42,7 +38,14 @@
                 "${workspaceFolder}/.piolibdeps/U8g2_ID942/src",
                 "${workspaceFolder}/lib/assets",
                 "${workspaceFolder}/lib/obstacle",
-                "${workspaceFolder}/lib/state"
+                "${workspaceFolder}/lib/state",
+                "${workspaceFolder}/lib/scorekeeper",
+                "${workspaceFolder}/lib/game",
+                "${workspaceFolder}/.piolibdeps/Bounce2_ID1106/src",
+                "${workspaceFolder}/.piolibdeps/U8g2_ID942/src",
+                "~/.platformio/packages/framework-arduinoespressif8266/cores/esp8266",
+                "~/.platformio/packages/framework-arduinoespressif8266/libraries/SPI",
+                "~/.platformio/packages/framework-arduinoespressif8266/libraries/Wire"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -53,7 +56,6 @@
                     "/usr/include/x86_64-linux-gnu/c++/7",
                     "/usr/include/c++/7/backward",
                     "/usr/lib/llvm-6.0/lib/clang/6.0.0/include",
-                    "/usr/local/include",
                     "/usr/include/x86_64-linux-gnu"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
