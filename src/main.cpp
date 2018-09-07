@@ -80,11 +80,8 @@ void setup(void) {
 bool buttonPressed = false;
 
 void loop(void) {
-  if (button.update()) {
-    buttonPressed = button.read();
-  } else {
-    buttonPressed = false;
-  }
+  button.update();
+  buttonPressed = button.fell();
   game.Update(buttonPressed);
   game.Draw();
 }
